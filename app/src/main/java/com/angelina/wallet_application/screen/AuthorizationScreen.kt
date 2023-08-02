@@ -1,6 +1,5 @@
 package com.angelina.wallet_application.screen
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,8 +21,7 @@ import com.angelina.wallet_application.ui.theme.Typography
 
 @Composable
 fun AuthorizationScreen(
-    onForgetPasswordTextClick: () -> Unit,
-    onLogInTextClick: () -> Unit,
+//    onLogInButtonClick: () -> Unit,
     onNoAccountTextClick: () -> Unit
 ) {
     Column(
@@ -35,18 +33,17 @@ fun AuthorizationScreen(
         Text(
             text = stringResource(id = R.string.authorization),
             style = Typography.titleMedium,
-            modifier = Modifier.padding(top = 110.dp, bottom = 38.dp)
+            modifier = Modifier.padding(top = 110.dp, bottom = 26.dp)
         )
 
-        TextField(R.string.email, R.string.email_example, 22.dp, isVerified = true)
-        TextField(R.string.password, R.string.password_lower_case, 16.dp, true)
+        TextField(R.string.email, R.string.email_example, 12.dp, isVerified = true)
+        TextField(R.string.password, R.string.password_lower_case, isPasswordField = true)
 
-        CommonButton(text = R.string.enter, topPadding = 38.dp, bottomPadding = 38.dp,
+        CommonButton(text = R.string.enter, topPadding = 32.dp, bottomPadding = 22.dp,
             onClick = {
-                onLogInTextClick()
+//                onLogInButtonClick()
             }
         )
-
 
         Row(verticalAlignment = Alignment.CenterVertically) { TextWithDivider() }
 
