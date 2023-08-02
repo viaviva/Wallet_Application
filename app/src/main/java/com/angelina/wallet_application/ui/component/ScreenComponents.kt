@@ -5,7 +5,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
@@ -22,13 +21,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.*
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -49,7 +45,7 @@ fun BottomText(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.Bottom,
         modifier = Modifier
-            .padding(bottom = 58.dp)
+            .padding(bottom = 46.dp)
             .fillMaxSize()
     ) {
 
@@ -76,7 +72,7 @@ fun BottomText(
 fun TextField(
     labelText: Int,
     textFieldText: Int,
-    textFieldBottomPadding: Dp,
+    textFieldBottomPadding: Dp = 0.dp,
     isPasswordField: Boolean = false,
     isVerified: Boolean = false
 ) {
@@ -126,7 +122,7 @@ fun TextField(
         modifier = Modifier
             .padding(bottom = textFieldBottomPadding)
             .fillMaxWidth()
-            .height(56.dp)
+            .height(54.dp)
             .border(
                 shape = RoundedCornerShape(10.dp),
                 width = 1.dp,
@@ -160,7 +156,7 @@ fun CommonButton(
         modifier = Modifier
             .padding(top = topPadding, bottom = bottomPadding)
             .fillMaxWidth()
-            .height(56.dp),
+            .height(54.dp),
         border = BorderStroke(1.dp, borderColor),
         colors = ButtonDefaults.buttonColors(
             containerColor = containerColor,
@@ -203,94 +199,13 @@ fun SignUpWithButton(
         shape = RoundedCornerShape(10.dp),
         border = BorderStroke(width = 1.dp, color = BorderTextFieldColor),
         color = Color.White,
-        modifier = Modifier.size(100.dp, 52.dp)
+        modifier = Modifier.size(100.dp, 54.dp)
     ) {
         Icon(
             painter = painterResource(id = icon),
             contentDescription = "",
             tint = Color.Unspecified,
             modifier = Modifier.padding(horizontal = 40.dp, vertical = 16.dp)
-        )
-    }
-}
-
-@Composable
-fun BackArrow(
-    onClick: () -> Unit = {},
-    color: Color
-) {
-    Surface(
-        shape = RoundedCornerShape(10.dp),
-        border = BorderStroke(width = 1.dp, color = Color.LightGray),
-        color = color,
-        modifier = Modifier
-            .size(52.dp, 36.dp)
-            .clickable(onClick = onClick)
-    ) {
-        Icon(
-            painter = painterResource(id = R.drawable.ic_arrow_back),
-            contentDescription = stringResource(id = R.string.google_icon),
-            tint = Color.Unspecified,
-            modifier = Modifier.absolutePadding(9.dp, 9.dp, 9.dp, 9.dp)
-        )
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun InputTextCode() {
-
-    var hasFocus by remember { mutableStateOf(false) }
-    var num by remember { mutableStateOf(TextFieldValue("")) }
-    val mMaxLength = 1
-
-    OutlinedTextField(
-        singleLine = true,
-        value = num,
-        onValueChange = {
-            if (it.text.length <= mMaxLength) num = it
-        },
-        modifier = Modifier
-            .size(width = 71.dp, height = 70.dp)
-            .border(
-                shape = RoundedCornerShape(10.dp),
-                width = 1.dp,
-                color = if (hasFocus) Color.Black else Color.LightGray
-
-            )
-            .onFocusChanged { focusState -> hasFocus = focusState.hasFocus },
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = Color.Unspecified,
-            unfocusedBorderColor = Color.Unspecified,
-            cursorColor = Color.Black
-        ),
-        textStyle = TextStyle(
-            fontSize = 30.sp, color = Color.Black, lineHeight = 35.7.sp,
-            fontFamily = textFontFamily,
-            textAlign = TextAlign.Center
-        ),
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Number,
-            imeAction = ImeAction.Next
-        )
-    )
-
-}
-
-@Composable
-fun ButtonMainScreen(onClick: () -> Unit = {}, color: Int, icon: Int) {
-    Surface(
-        shape = RoundedCornerShape(10.dp),
-        color = colorResource(id = color),
-        modifier = Modifier
-            .size(52.dp, 36.dp)
-            .clickable(onClick = onClick)
-    ) {
-        Icon(
-            painter = painterResource(id = icon),
-            contentDescription = stringResource(id = R.string.google_icon),
-            tint = Color.Unspecified,
-            modifier = Modifier.absolutePadding(6.dp, 6.dp, 6.dp, 6.dp)
         )
     }
 }
