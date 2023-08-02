@@ -1,3 +1,35 @@
 <resources>
-    <string name="app_name">Wallet_Application</string>
+
+    <string name="app_name">LoyaltyApk</string>
+
+    <string name="application_name">Loyalty system</string>
+    <string name="slogan_text">All establishments in one place and under your control!</string>
+    <string name="authorization">Authorization</string>
+    <string name="registration">Registration</string>
+
+    <string name="email">Email</string>
+    <string name="email_example">example@gmail.com</string>
+    <string name="remember_password">Remember password?</string>
+    <string name="enter">Enter</string>
+    <string name="get_the_code">Get the code</string>
+
+    <string name="password_validation">at least 8 characters</string>
+    <string name="confirm_new_password">Confirm new password</string>
+    <string name="repeat_password">repeat password</string>
+    <string name="have_an_account">Already have an account?</string>
+    <string name="go_to_login">Go to login</string>
+
+    <string name="password">Password</string>
+    <string name="password_lower_case">password</string>
+
+    <string name="no_account">No account</string>
+    <string name="sign_up">Sign up</string>
+    <string name="google_icon">google icon</string>
+    <string name="user_name">user name</string>
+    <string name="inv_pass">Create password</string>
+    <string name="check_pass">Confirm password</string>
+    <string name="create_acc">Create new account</string>
+
+    <string name="your_name">Your name</string>
+
 </resources>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LoyaltyApk</string>
+
+    <string name="application_name">Система лояльности</string>
+    <string name="slogan_text">Все заведения в одном месте и под твоим контролем!</string>
+    <string name="authorization">Авторизация</string>
+    <string name="registration">Регистрация</string>
+
+    <string name="forget_password">Забыли пароль?</string>
+    <string name="forget_password_text">Ничего страшного, такое иногда случается :) Пожалуйста, введите электронную почту, которая привязана к вашему аккаунту.</string>
+    <string name="email">Электронная почта</string>
+    <string name="email_example">example@gmail.com</string>
+    <string name="remember_password">Помните пароль?</string>
+    <string name="enter">Войти</string>
+    <string name="get_the_code">Получить код</string>
+
+    <string name="recover_password">Восстановить пароль</string>
+    <string name="recover_password_text">Придумайте новый пароль, чтоб восстановить доступ к вашему аккаунту.</string>
+    <string name="new_password">Новый пароль</string>
+    <string name="password_validation">не менее 8 символов</string>
+    <string name="confirm_new_password">Подвердите новый пароль</string>
+    <string name="repeat_password">повторите пароль</string>
+    <string name="have_an_account">Уже есть аккаунт?</string>
+    <string name="go_to_login">Перейти к авторизации</string>
+
+    <string name="password_changed">Пароль изменен</string>
+    <string name="password_changed_successfully">Ваш пароль был изменен успешно</string>
+
+    <string name="password">Пароль</string>
+    <string name="password_lower_case">пароль</string>
+    <string name="no_account">Нет аккаунта?</string>
+    <string name="sign_up">Зарегистрироваться</string>
+
+    <string name="google_icon">google icon</string>
+    <string name="user_name">имя пользователя</string>
+    <string name="inv_pass">Придумать пароль</string>
+    <string name="check_pass">Подтвердить пароль</string>
+    <string name="create_acc">Создать аккаунт</string>
+    <string name="check_your_email">Проверьте вашу электронную почту</string>
+    <string name="send_code">Мы отправили вам код на</string>
+    <string name="confirm">Подтвердить</string>
+    <string name="send_another_code">Прислать код повторно</string>
+
+    <string name="your_name">Ваше имя</string>
+    <string name="main">Главная</string>
+    <string name="catalog">Каталог</string>
+    <string name="scanner">Сканер</string>
+    <string name="settings">Настройки</string>
+
+    <string name="comeback">С возвращением,</string>
+    <string name="name">Андрей</string>
+    <string name="my_qr">Мой QR Код</string>
+    <string name="places">Заведений</string>
+    <string name="favourites">Избранных</string>
+
+    <string name="profile">Профиль</string>
+    <string name="main_theme">Главная тема</string>
+    <string name="confidentiality">Конфиденциальность</string>
+    <string name="asked_questions">Часто задаваемые вопросы</string>
+    <string name="log_out">Выйти</string>
+
+    <string name="search">Поиск</string>
+    <string name="all_shops">Все заведения</string>
+    <string name="my_bonuses">Мои бонусы</string>
+</resources>
