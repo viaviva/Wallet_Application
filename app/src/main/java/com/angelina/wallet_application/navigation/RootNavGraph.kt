@@ -3,6 +3,8 @@ package com.angelina.wallet_application.navigation
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import com.angelina.wallet_application.screen.BottomBarMainScreen
 
 @Composable
 fun RootNavGraph(navController: NavHostController) {
@@ -12,6 +14,9 @@ fun RootNavGraph(navController: NavHostController) {
         startDestination = Graph.AUTHENTICATION
     ) {
         authNavGraph(navController = navController)
+        composable(route = Graph.HOME) {
+            BottomBarMainScreen()
+        }
     }
 }
 
