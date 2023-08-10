@@ -70,14 +70,16 @@ fun BottomText(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TextField(
+    text: String,
     labelText: Int,
     textFieldText: Int,
     textFieldBottomPadding: Dp = 0.dp,
     isPasswordField: Boolean = false,
-    isVerified: Boolean = false
+    isVerified: Boolean = false,
+    onValueChange: (String) -> Unit,
+//    isError: (Any) -> Unit
 ) {
 
-    var text by rememberSaveable { mutableStateOf("") }
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
     var hasFocus by remember { mutableStateOf(false) }
 
@@ -89,7 +91,7 @@ fun TextField(
 
     OutlinedTextField(
         value = text, onValueChange = {
-            text = it
+            onValueChange(it)
         },
         placeholder = {
             Text(text = stringResource(id = textFieldText))

@@ -32,4 +32,8 @@
 
     <string name="your_name">Your name</string>
 
+    <string name="my_cards">My cards</string>
+    <string name="catalog">Catalog</string>
+    <string name="profile">Profile</string>
+
 </resources>

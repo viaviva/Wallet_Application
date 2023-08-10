@@ -1,4 +1,4 @@
-package com.angelina.wallet_application.screen
+package com.angelina.wallet_application.screen.authorization
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.angelina.wallet_application.R
 import com.angelina.wallet_application.ui.component.BottomText
 import com.angelina.wallet_application.ui.component.CommonButton
@@ -19,11 +20,16 @@ import com.angelina.wallet_application.ui.component.TextField
 import com.angelina.wallet_application.ui.component.TextWithDivider
 import com.angelina.wallet_application.ui.theme.Typography
 
+
 @Composable
 fun AuthorizationScreen(
-//    onLogInButtonClick: () -> Unit,
-    onNoAccountTextClick: () -> Unit
+    onLogInButtonClick: () -> Unit,
+    onNoAccountTextClick: () -> Unit,
+    viewModel: AuthorizationViewModel = hiltViewModel()
 ) {
+
+    viewModel.successLogin = onLogInButtonClick
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -36,12 +42,24 @@ fun AuthorizationScreen(
             modifier = Modifier.padding(top = 110.dp, bottom = 26.dp)
         )
 
-        TextField(R.string.email, R.string.email_example, 12.dp, isVerified = true)
-        TextField(R.string.password, R.string.password_lower_case, isPasswordField = true)
+        TextField(
+            viewModel.email,
+            R.string.email,
+            R.string.email_example,
+            12.dp,
+            isVerified = true
+        ) { email -> viewModel.updateEmail(email) }
+
+        TextField(
+            viewModel.password,
+            R.string.password,
+            R.string.password_lower_case,
+            isPasswordField = true
+        ) { password -> viewModel.updatePassword(password) }
 
         CommonButton(text = R.string.enter, topPadding = 32.dp, bottomPadding = 22.dp,
             onClick = {
-//                onLogInButtonClick()
+                viewModel.login("a@a.aaaa", "aaaaaa")
             }
         )
 
