@@ -211,3 +211,26 @@ fun SignUpWithButton(
         )
     }
 }
+
+@Composable
+fun BackArrow(
+    onClick: () -> Unit = {},
+    color: Color = Color.Black,
+    arrow: Int = R.drawable.ic_arrow_white
+) {
+    Surface(
+        shape = RoundedCornerShape(10.dp),
+        border = BorderStroke(width = 1.dp, color = color),
+        color = color,
+        modifier = Modifier
+            .size(40.dp, 40.dp)
+            .clickable(onClick = onClick)
+    ) {
+        Icon(
+            painter = painterResource(id = arrow),
+            contentDescription = "",
+            tint = Color.Unspecified,
+            modifier = Modifier.padding(9.dp, 9.dp, 9.dp, 9.dp)
+        )
+    }
+}
