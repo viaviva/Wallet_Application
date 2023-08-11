@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.angelina.wallet_application.screen.CardScreen
+import com.angelina.wallet_application.screen.ListCardsScreen
 import com.angelina.wallet_application.ui.component.BottomBarScreen
 
 @Composable
@@ -17,7 +18,7 @@ fun BottomNavGraph(navController: NavHostController) {
     ) {
 
         composable(BottomBarScreen.MyCards.route) {
-            CardScreen()
+            ListCardsScreen()
         }
         composable(BottomBarScreen.Catalog.route) {
             CardScreen()
