@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "201636024331",
-    "project_id": "walletapplication-a2a97",
-    "storage_bucket": "walletapplication-a2a97.appspot.com"
+    "project_number": "615148946579",
+    "firebase_url": "https://walletapplication-b4dad-default-rtdb.firebaseio.com",
+    "project_id": "walletapplication-b4dad",
+    "storage_bucket": "walletapplication-b4dad.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:201636024331:android:899b6d996303048188b70e",
+        "mobilesdk_app_id": "1:615148946579:android:31c6571a136f5823c7b966",
         "android_client_info": {
           "package_name": "com.angelina.wallet_application"
         }
       },
       "oauth_client": [
         {
-          "client_id": "201636024331-1bkksueigl4qoekeji1svj054t6gup5f.apps.googleusercontent.com",
+          "client_id": "615148946579-sdmfsrg7ka0f861pbl7bc04susgh0k2p.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCtSiJacyUU-Yv32u89w7ejfNihcwXqt6Q"
+          "current_key": "AIzaSyASaVRP-trnNgQkNM-L7mqgbF0_tk7fOqY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "201636024331-1bkksueigl4qoekeji1svj054t6gup5f.apps.googleusercontent.com",
+              "client_id": "615148946579-sdmfsrg7ka0f861pbl7bc04susgh0k2p.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

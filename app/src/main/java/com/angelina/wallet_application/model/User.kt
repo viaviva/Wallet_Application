@@ -1,7 +1,7 @@
 package com.angelina.wallet_application.model
 
 data class User(
-    val idUser: String,
-    val username: String,
-    val cards: List<Card> = listOf()
+    var isNoCards: Boolean = true,
+    val cards: List<Card>? = listOf(),
+    val username: String
 )

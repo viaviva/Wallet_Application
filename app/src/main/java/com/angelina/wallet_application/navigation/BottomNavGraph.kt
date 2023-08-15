@@ -2,11 +2,15 @@ package com.angelina.wallet_application.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.angelina.wallet_application.screen.CardScreen
-import com.angelina.wallet_application.screen.ListCardsScreen
+import com.angelina.wallet_application.screen.listCards.ListCardsScreen
 import com.angelina.wallet_application.ui.component.BottomBarScreen
+
+const val ITEM_SCREEN = "itemScreen"
 
 @Composable
 fun BottomNavGraph(navController: NavHostController) {
@@ -18,13 +22,23 @@ fun BottomNavGraph(navController: NavHostController) {
     ) {
 
         composable(BottomBarScreen.MyCards.route) {
-            ListCardsScreen()
+            ListCardsScreen() {
+                navController.navigate("$ITEM_SCREEN/${it}")
+            }
         }
         composable(BottomBarScreen.Catalog.route) {
-            CardScreen()
+            ListCardsScreen()
         }
         composable(BottomBarScreen.Profile.route) {
-            CardScreen()
+            ListCardsScreen()
+        }
+        composable(
+            "$ITEM_SCREEN/{shopImage}",
+            arguments = listOf(navArgument("shopImage") {
+                type = NavType.StringType
+            })
+        ) {
+            CardScreen(it.arguments?.getString("shopImage") ?: "")
         }
     }
 }

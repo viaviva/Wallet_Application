@@ -20,7 +20,6 @@ import com.angelina.wallet_application.ui.component.TextField
 import com.angelina.wallet_application.ui.component.TextWithDivider
 import com.angelina.wallet_application.ui.theme.Typography
 
-
 @Composable
 fun AuthorizationScreen(
     onLogInButtonClick: () -> Unit,
@@ -33,7 +32,7 @@ fun AuthorizationScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 26.dp)
+            .padding(horizontal = 22.dp)
     ) {
 
         Text(
@@ -59,7 +58,7 @@ fun AuthorizationScreen(
 
         CommonButton(text = R.string.enter, topPadding = 32.dp, bottomPadding = 22.dp,
             onClick = {
-                viewModel.login("a@a.aaaa", "aaaaaa")
+                viewModel.login()
             }
         )
 
@@ -79,8 +78,6 @@ fun AuthorizationScreen(
     BottomText(
         R.string.no_account,
         R.string.sign_up
-    ) {
-        onNoAccountTextClick()
-    }
+    ) { onNoAccountTextClick() }
 
 }

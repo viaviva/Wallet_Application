@@ -30,7 +30,7 @@ fun RegistrationScreen(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 26.dp)
+            .padding(horizontal = 22.dp)
     ) {
 
         Text(
@@ -61,7 +61,7 @@ fun RegistrationScreen(
                 R.string.password_validation,
                 12.dp,
                 true
-            ) { email -> updateEmail(email) }
+            ) { email -> updatePassword(email) }
 
             TextField(
                 confirmPassword,
