@@ -1,5 +1,6 @@
-package com.angelina.wallet_application.screen
+package com.angelina.wallet_application.screen.listCards
 
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -15,31 +16,34 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.angelina.wallet_application.R
-import com.angelina.wallet_application.model.Shop
+import com.angelina.wallet_application.entity.CardFirebase
 import com.angelina.wallet_application.ui.theme.Typography
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ListCardsScreen() {
+fun ListCardsScreen(
+    viewModel: ListCardsViewModel = hiltViewModel(),
+    onItemClick: (String) -> Unit = {}
+) {
+
+    val listOfCards = viewModel.listOfCards.observeAsState()
+    viewModel.getUserCards()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 22.dp)
     ) {
-
-        val listOfShops = listOf(
-            Shop(1, "https://upload.wikimedia.org/wikipedia/commons/c/c0/Logo_euroopt.png", "Кофеек"),
-            Shop(2, "https://upload.wikimedia.org/wikipedia/commons/c/c0/Logo_euroopt.png", "Кофеек"),
-            Shop(3, "https://upload.wikimedia.org/wikipedia/commons/c/c0/Logo_euroopt.png", "Кофеек"),
-        )
 
         Text(
             text = stringResource(id = R.string.my_cards),
@@ -52,32 +56,34 @@ fun ListCardsScreen() {
             verticalItemSpacing = 10.dp,
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            items(listOfShops) {
-                CardItem(card = it) {
-//                    navController.navigate("$ITEM_SCREEN/${it.id}")
+            items(listOfCards.value ?: arrayListOf()) {
+                val image = viewModel.getShopImageById(it.idShop)
+                Log.e("IMAGE", image)
+                CardItem(it, image) {
+                    Log.e("IMAGE", image)
+                    onItemClick("image")
                 }
             }
         }
 
     }
 
-
 }
 
 @Composable
 fun CardItem(
-    card: Shop,
+    card: CardFirebase,
+    image: String,
     onCLick: () -> Unit = {}
 ) {
     Column(
         modifier = Modifier.selectable(
-            true,
-            onClick = onCLick
+            true, onClick = onCLick
         )
     ) {
         Column {
             AsyncImage(
-                model = card.imageUml,
+                model = image,
                 contentScale = ContentScale.FillWidth,
                 contentDescription = "",
                 modifier = Modifier

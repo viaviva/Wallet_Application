@@ -14,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -22,7 +21,9 @@ import com.angelina.wallet_application.ui.component.BackArrow
 import com.angelina.wallet_application.ui.theme.Typography
 
 @Composable
-fun CardScreen() {
+fun CardScreen(
+    image: String
+) {
     Column(
         modifier = Modifier
             .padding(horizontal = 22.dp)
@@ -38,7 +39,7 @@ fun CardScreen() {
             modifier = Modifier.padding(vertical = 26.dp)
         ) {
             AsyncImage(
-                model = "https://upload.wikimedia.org/wikipedia/commons/c/c0/Logo_euroopt.png",
+                model = image,
                 contentScale = ContentScale.FillWidth,
                 contentDescription = "",
                 modifier = Modifier
@@ -82,10 +83,4 @@ fun CardScreen() {
         }
 
     }
-}
-
-@Composable
-@Preview
-fun CardScreenPreview() {
-    CardScreen()
 }

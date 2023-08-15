@@ -34,10 +34,7 @@ class AuthorizationViewModel @Inject constructor(
 
     var successLogin: (() -> Unit)? = null
 
-    fun login(
-        email: String,
-        password: String
-    ) {
+    fun login() {
         isLoading.value = true
         loginRepository.login(
             email, password, {

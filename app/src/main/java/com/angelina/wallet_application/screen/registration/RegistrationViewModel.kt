@@ -49,7 +49,7 @@ class RegistrationViewModel @Inject constructor(
     fun registration() {
         isLoading.value = true
         loginRepository.registration(
-            email, password, {
+            email, password, name, {
                 isLoading.value = false
                 successRegistration?.invoke()
             }, {
