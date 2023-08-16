@@ -7,13 +7,20 @@ import androidx.navigation.compose.composable
 import com.angelina.wallet_application.screen.BottomBarMainScreen
 
 @Composable
-fun RootNavGraph(navController: NavHostController) {
+fun RootNavGraph(
+    navController: NavHostController,
+    isFirstOpen: Boolean,
+    isUserLogin: Boolean
+) {
+
+    val startDestination = if (!isUserLogin) Graph.AUTHENTICATION else Graph.HOME
+
     NavHost(
         navController = navController,
         route = Graph.ROOT,
-        startDestination = Graph.AUTHENTICATION
+        startDestination = startDestination
     ) {
-        authNavGraph(navController = navController)
+        authNavGraph(navController = navController, isFirstOpen)
         composable(route = Graph.HOME) {
             BottomBarMainScreen()
         }

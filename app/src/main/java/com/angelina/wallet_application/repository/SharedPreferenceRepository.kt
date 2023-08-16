@@ -8,6 +8,10 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 private const val USER_PREF_FILE = "userPrefFile"
+private const val SHARED_PREF_FILE = "sharedPrefFile"
+
+private const val IS_FIRST_OPEN = "isFirstOpen"
+private const val IS_USER_LOG_IN = "isLogIn"
 
 private const val USERNAME = "username"
 private const val DEFAULT_USERNAME = "username"
@@ -21,10 +25,28 @@ class SharedPreferenceRepository @Inject constructor(
 ) {
 
     private var userPreferences: SharedPreferences? = null
+    private var sharedPreferences: SharedPreferences? = null
 
     init {
         userPreferences = context.getSharedPreferences(USER_PREF_FILE, Context.MODE_PRIVATE)
+        sharedPreferences = context.getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
     }
+
+    fun setIsFirstOpen() {
+        sharedPreferences?.edit {
+            putBoolean(IS_FIRST_OPEN, true)
+        }
+    }
+
+    fun getIsFirstOpen(): Boolean = sharedPreferences?.getBoolean(IS_FIRST_OPEN, false) ?: false
+
+    fun setIsUserLogIn() {
+        userPreferences?.edit {
+            putBoolean(IS_USER_LOG_IN, true)
+        }
+    }
+
+    fun getIsUserLogIn(): Boolean = userPreferences?.getBoolean(IS_USER_LOG_IN, false) ?: false
 
     fun setUsername(username: String) {
         userPreferences?.edit {
