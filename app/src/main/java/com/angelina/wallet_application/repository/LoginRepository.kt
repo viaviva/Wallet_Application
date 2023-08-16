@@ -23,16 +23,20 @@ class LoginRepository @Inject constructor(
                 val user = auth.currentUser
 
                 user?.let {
-                    sharedPreferenceRepository.setUserId(it.uid)
+                    sharedPreferenceRepository.run {
+                        setIsUserLogIn()
+                        setUserId(it.uid)
+                    }
 
-                    database.child("users").child(it.uid).child("username").get().addOnSuccessListener { username ->
-                        Log.e("User", user.toString())
+                    database.child("users").child(it.uid).child("username").get()
+                        .addOnSuccessListener { username ->
+                            Log.e("User", user.toString())
 
-                        sharedPreferenceRepository.setUsername(username.value.toString())
-                        Log.e("SP", sharedPreferenceRepository.getUsername())
+                            sharedPreferenceRepository.setUsername(username.value.toString())
+                            Log.e("SP", sharedPreferenceRepository.getUsername())
 
-                        Log.i("firebase", "Got value")
-                    }.addOnFailureListener {
+                            Log.i("firebase", "Got value")
+                        }.addOnFailureListener {
                         Log.e("firebase", "Error getting data")
                     }
                 }
@@ -56,9 +60,13 @@ class LoginRepository @Inject constructor(
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val user = auth.currentUser
-                Log.e("USER", user.toString())
 
                 user?.let {
+                    sharedPreferenceRepository.run {
+                        setIsUserLogIn()
+                        setUserId(it.uid)
+                    }
+
                     database.child("users").child(it.uid).setValue(User(username = username))
                         .addOnSuccessListener {
                             sharedPreferenceRepository.setUsername(username)
@@ -66,8 +74,8 @@ class LoginRepository @Inject constructor(
 
                             Log.i("firebase", "Got value")
                         }.addOnFailureListener {
-                        Log.e("firebase", "Error getting data")
-                    }
+                            Log.e("firebase", "Error getting data")
+                        }
                 }
 
                 onSuccess()

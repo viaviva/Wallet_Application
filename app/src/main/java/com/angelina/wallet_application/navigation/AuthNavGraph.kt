@@ -8,16 +8,29 @@ import androidx.navigation.navigation
 import com.angelina.wallet_application.screen.EntryScreen
 import com.angelina.wallet_application.screen.RegistrationScreen
 import com.angelina.wallet_application.screen.authorization.AuthorizationScreen
+import com.angelina.wallet_application.screen.onboarding.OnBoardingScreen
+import com.google.accompanist.pager.ExperimentalPagerApi
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalPagerApi::class)
 fun NavGraphBuilder.authNavGraph(
-    navController: NavHostController
+    navController: NavHostController,
+    isFirstOpen: Boolean
 ) {
+
+    val startDestination = if (!isFirstOpen) AuthScreen.Onboarding.route else AuthScreen.Entry.route
 
     navigation(
         route = Graph.AUTHENTICATION,
-        startDestination = AuthScreen.Entry.route
+        startDestination = startDestination
     ) {
+        composable(route = AuthScreen.Onboarding.route) {
+            OnBoardingScreen(
+                onSkipClick = {
+                    navController.navigate(AuthScreen.Entry.route)
+                }
+            )
+        }
 
         composable(route = AuthScreen.Entry.route) {
             EntryScreen(
@@ -80,5 +93,8 @@ sealed class AuthScreen(val route: String) {
     object Entry : AuthScreen(route = "ENTRY")
     object Login : AuthScreen(route = "LOGIN")
     object SignUp : AuthScreen(route = "SIGN_UP")
+
+    object Onboarding : AuthScreen(route = "ONBOARDING")
+
 }
 
