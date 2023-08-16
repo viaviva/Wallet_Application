@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.angelina.wallet_application.screen.BottomBarMainScreen
+import com.angelina.wallet_application.screen.splash.SplashScreen
 
 @Composable
 fun RootNavGraph(
@@ -13,22 +14,30 @@ fun RootNavGraph(
     isUserLogin: Boolean
 ) {
 
-    val startDestination = if (!isUserLogin) Graph.AUTHENTICATION else Graph.HOME
+    val navigate = if (!isUserLogin) Graph.AUTHENTICATION else Graph.HOME
 
     NavHost(
         navController = navController,
         route = Graph.ROOT,
-        startDestination = startDestination
+        startDestination = Graph.SPLASH
     ) {
+        composable(route = Graph.SPLASH) {
+            SplashScreen() {
+                navController.popBackStack()
+                navController.navigate(navigate)
+            }
+        }
         authNavGraph(navController = navController, isFirstOpen)
         composable(route = Graph.HOME) {
             BottomBarMainScreen()
         }
     }
+
 }
 
 object Graph {
-    const val ROOT = "ROOT_GRAPH"
-    const val AUTHENTICATION = "AUTH_GRAPH"
-    const val HOME = "HOME_GRAPH"
+    const val SPLASH = "SPLASH"
+    const val ROOT = "ROOT"
+    const val AUTHENTICATION = "AUTH"
+    const val HOME = "HOME"
 }
