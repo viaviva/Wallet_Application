@@ -33,12 +33,12 @@ fun BottomNavGraph(navController: NavHostController) {
             ListCardsScreen()
         }
         composable(
-            "$ITEM_SCREEN/{shopImage}",
-            arguments = listOf(navArgument("shopImage") {
-                type = NavType.StringType
+            "$ITEM_SCREEN/{id}",
+            arguments = listOf(navArgument("id") {
+                type = NavType.LongType
             })
         ) {
-            CardScreen(it.arguments?.getString("shopImage") ?: "")
+            CardScreen(it.arguments?.getLong("id") ?: 0)
         }
     }
 }

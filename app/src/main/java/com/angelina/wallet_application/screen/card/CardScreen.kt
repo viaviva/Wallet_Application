@@ -10,20 +10,29 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
+import com.angelina.wallet_application.screen.card.CardViewModel
 import com.angelina.wallet_application.ui.component.BackArrow
 import com.angelina.wallet_application.ui.theme.Typography
 
 @Composable
 fun CardScreen(
-    image: String
+    id: Long,
+    viewModel: CardViewModel = hiltViewModel()
 ) {
+
+    val card = viewModel.card.observeAsState()
+    val image = viewModel.getShopImage(id) ?: " "
+    viewModel.getCard(id)
+
     Column(
         modifier = Modifier
             .padding(horizontal = 22.dp)

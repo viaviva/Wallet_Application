@@ -30,12 +30,9 @@ class LoginRepository @Inject constructor(
 
                     database.child("users").child(it.uid).child("username").get()
                         .addOnSuccessListener { username ->
-                            Log.e("User", user.toString())
 
                             sharedPreferenceRepository.setUsername(username.value.toString())
-                            Log.e("SP", sharedPreferenceRepository.getUsername())
 
-                            Log.i("firebase", "Got value")
                         }.addOnFailureListener {
                         Log.e("firebase", "Error getting data")
                     }
