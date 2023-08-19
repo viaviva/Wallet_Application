@@ -26,18 +26,17 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.angelina.wallet_application.R
-import com.angelina.wallet_application.entity.CardFirebase
 import com.angelina.wallet_application.ui.theme.Typography
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ListCardsScreen(
     viewModel: ListCardsViewModel = hiltViewModel(),
-    onItemClick: (String) -> Unit = {}
+    onItemClick: (Long) -> Unit = {}
 ) {
 
     val listOfCards = viewModel.listOfCards.observeAsState()
-    viewModel.getUserCards()
+    Log.e("getAllCards", listOfCards.toString())
 
     Column(
         modifier = Modifier
@@ -57,11 +56,8 @@ fun ListCardsScreen(
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             items(listOfCards.value ?: arrayListOf()) {
-                val image = viewModel.getShopImageById(it.idShop)
-                Log.e("IMAGE", image)
-                CardItem(it, image) {
-                    Log.e("IMAGE", image)
-                    onItemClick("image")
+                CardItem(viewModel.getShopImage(it.idShop).toString()) {
+                    onItemClick(it.idCard)
                 }
             }
         }
@@ -72,10 +68,11 @@ fun ListCardsScreen(
 
 @Composable
 fun CardItem(
-    card: CardFirebase,
-    image: String,
+    image: String = " ",
     onCLick: () -> Unit = {}
 ) {
+    Log.e("image", image)
+
     Column(
         modifier = Modifier.selectable(
             true, onClick = onCLick
