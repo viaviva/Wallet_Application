@@ -1,5 +1,6 @@
 package com.angelina.wallet_application.screen.onboarding
 
+import android.Manifest
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
@@ -42,8 +43,11 @@ import com.angelina.wallet_application.R
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberPermissionState
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalPermissionsApi::class)
 @ExperimentalPagerApi
 @Composable
 fun OnBoardingScreen(
@@ -53,6 +57,7 @@ fun OnBoardingScreen(
     val items = OnBoardingItems.getData()
     val scope = rememberCoroutineScope()
     val pageState = rememberPagerState()
+    val cameraPermissionState = rememberPermissionState(permission = Manifest.permission.CAMERA)
 
     Column(modifier = Modifier.fillMaxSize()) {
         TopSection(
@@ -61,7 +66,10 @@ fun OnBoardingScreen(
                     pageState.scrollToPage(0)
                 }
             },
-            onSkipClick = onSkipClick,
+            onSkipClick = {
+                onSkipClick()
+                cameraPermissionState.launchPermissionRequest()
+            },
             isLastPage = pageState.currentPage == items.size - 1
         )
 

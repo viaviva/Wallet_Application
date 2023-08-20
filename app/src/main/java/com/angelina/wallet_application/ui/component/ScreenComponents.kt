@@ -1,5 +1,6 @@
 package com.angelina.wallet_application.ui.component
 
+import androidx.camera.core.ExperimentalGetImage
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -68,6 +69,7 @@ fun BottomText(
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
+@ExperimentalGetImage
 @Composable
 fun TextField(
     text: String,
@@ -76,6 +78,8 @@ fun TextField(
     textFieldBottomPadding: Dp = 0.dp,
     isPasswordField: Boolean = false,
     isVerified: Boolean = false,
+    isScanner: Boolean = false,
+    onScannerButtonClick: () -> Unit = {},
     onValueChange: (String) -> Unit,
 //    isError: (Any) -> Unit
 ) {
@@ -114,6 +118,19 @@ fun TextField(
                 val image = R.drawable.ic_verified
 
                 IconButton(onClick = {}) {
+                    Icon(
+                        painter = painterResource(id = image),
+                        contentDescription = ""
+                    )
+                }
+            }
+
+            if (isScanner) {
+                val image = R.drawable.ic_verified
+
+                IconButton(
+                    onClick = onScannerButtonClick
+                ) {
                     Icon(
                         painter = painterResource(id = image),
                         contentDescription = ""

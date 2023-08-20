@@ -3,8 +3,10 @@ package com.angelina.wallet_application.repository
 import android.util.Log
 import com.angelina.wallet_application.db.CardDao
 import com.angelina.wallet_application.entity.firebase.CardFirebase
+import com.angelina.wallet_application.model.Card
 import com.angelina.wallet_application.util.toCard
 import com.angelina.wallet_application.util.toCardEntity
+import com.angelina.wallet_application.util.toCardFirebase
 import com.angelina.wallet_application.util.toListCard
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -72,6 +74,15 @@ class CardRepository @Inject constructor(
 
     suspend fun getAllCards() = cardDao.getAllCards().toListCard()
 
+    suspend fun getCountOfCards() = cardDao.getAllCards().size
+
     suspend fun getCard(id: String) = cardDao.getCard(id).toCard()
+
+    suspend fun addCard(card: Card) {
+        cardDao.insertCard(card.toCardEntity())
+
+        database.child("users").child(sharedPreferenceRepository.getUserId()).child("cards")
+            .child(card.idCard.toString()).setValue(card.toCardFirebase())
+    }
 
 }

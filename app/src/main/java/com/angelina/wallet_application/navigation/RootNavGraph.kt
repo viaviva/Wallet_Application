@@ -1,5 +1,6 @@
 package com.angelina.wallet_application.navigation
 
+import androidx.camera.core.ExperimentalGetImage
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -7,6 +8,7 @@ import androidx.navigation.compose.composable
 import com.angelina.wallet_application.screen.BottomBarMainScreen
 import com.angelina.wallet_application.screen.splash.SplashScreen
 
+@ExperimentalGetImage
 @Composable
 fun RootNavGraph(
     navController: NavHostController,

@@ -19,17 +19,20 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.common.util.concurrent.ListenableFuture
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 @androidx.camera.core.ExperimentalGetImage
 @Composable
-fun ScannerScreen() {
+fun ScannerScreen(
+    onGetBarcode: (String) -> Unit = {},
+    viewModel: ScannerViewModel = hiltViewModel()
+) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     var preview by remember { mutableStateOf<Preview?>(null) }
-    val barCodeVal = remember { mutableStateOf("") }
 
     AndroidView(
         factory = { AndroidViewContext ->
@@ -59,8 +62,9 @@ fun ScannerScreen() {
                 val barcodeAnalyser = BarcodeAnalyser { barcodes ->
                     barcodes.forEach { barcode ->
                         barcode.rawValue?.let { barcodeValue ->
-                            barCodeVal.value = barcodeValue
+                            viewModel.setScanner()
                             Toast.makeText(context, barcodeValue, Toast.LENGTH_SHORT).show()
+                            onGetBarcode(barcodeValue)
                         }
                     }
                 }

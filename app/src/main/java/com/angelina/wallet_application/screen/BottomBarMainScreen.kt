@@ -1,5 +1,6 @@
 package com.angelina.wallet_application.screen
 
+import androidx.camera.core.ExperimentalGetImage
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -20,6 +21,7 @@ import com.angelina.wallet_application.ui.theme.Purple40
 import com.angelina.wallet_application.ui.theme.textFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
+@ExperimentalGetImage
 @Composable
 fun BottomBarMainScreen() {
     val bottomNavController = rememberNavController()
@@ -63,9 +65,14 @@ fun BottomBar(
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
 
                 onClick = {
-                    bottomNavController.navigate(screen.route) {
-                        popUpTo("main") {
-                            inclusive = true
+                    val value = " "
+                    val route =
+                        if (screen.route == BottomBarScreen.Catalog.route) BottomBarScreen.Catalog.route + "/${value}"
+                        else screen.route
+
+                    bottomNavController.navigate(route) {
+                        popUpTo(BottomBarScreen.MyCards.route) {
+                            inclusive = false
                         }
                     }
 

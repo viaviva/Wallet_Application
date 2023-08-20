@@ -21,7 +21,7 @@ class BarcodeAnalyser(
         if (currentTimestamp - lastAnalyzedTimeStamp >= TimeUnit.SECONDS.toMillis(1)) {
             image.image?.let { imageToAnalyze ->
                 val options = BarcodeScannerOptions.Builder()
-                    .setBarcodeFormats(Barcode.FORMAT_QR_CODE)
+                    .setBarcodeFormats(Barcode.FORMAT_ALL_FORMATS)
                     .build()
                 val barcodeScanner = BarcodeScanning.getClient(options)
                 val imageToProcess =
