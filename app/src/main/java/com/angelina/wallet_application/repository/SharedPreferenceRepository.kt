@@ -19,6 +19,10 @@ private const val DEFAULT_USERNAME = "username"
 private const val USER_ID = "user_id"
 private const val DEFAULT_USER_ID = "user_id"
 
+private const val SCANNER_OPEN = "scannerOpen"
+
+private const val SHOP = "shop"
+
 @Singleton
 class SharedPreferenceRepository @Inject constructor(
     @ApplicationContext context: Context
@@ -65,5 +69,24 @@ class SharedPreferenceRepository @Inject constructor(
 
     fun getUserId(): String =
         userPreferences?.getString(USER_ID, DEFAULT_USER_ID) ?: DEFAULT_USER_ID
+
+    fun setScanner(isOpen: Boolean) {
+        userPreferences?.edit {
+            putBoolean(SCANNER_OPEN, isOpen)
+        }
+    }
+
+    fun getScanner(): Boolean =
+        userPreferences?.getBoolean(SCANNER_OPEN, false) ?: false
+
+    fun setShop(id: Int) {
+        userPreferences?.edit {
+            putInt(SHOP , id)
+        }
+    }
+
+    fun getShop(): Int =
+        userPreferences?.getInt(SHOP, -1) ?: -1
+
 
 }

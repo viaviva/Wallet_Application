@@ -40,4 +40,8 @@
     <string name="skip">Пропустить</string>
     <string name="done">Готово</string>
 
+    <string name="addCard">Добавление карты</string>
+    <string name="add">Добавить</string>
+    <string name="card_number">Номер карты</string>
+
 </resources>

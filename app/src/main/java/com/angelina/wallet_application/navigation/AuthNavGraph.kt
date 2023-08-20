@@ -1,5 +1,6 @@
 package com.angelina.wallet_application.navigation
 
+import androidx.camera.core.ExperimentalGetImage
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -12,38 +13,39 @@ import com.angelina.wallet_application.screen.onboarding.OnBoardingScreen
 import com.google.accompanist.pager.ExperimentalPagerApi
 import kotlinx.coroutines.launch
 
+@ExperimentalGetImage
 @OptIn(ExperimentalPagerApi::class)
 fun NavGraphBuilder.authNavGraph(
     navController: NavHostController,
     isFirstOpen: Boolean
 ) {
 
-    val startDestination = if (!isFirstOpen) AuthScreen.Onboarding.route else AuthScreen.Entry.route
+    val startDestination = if (!isFirstOpen) Auth.Onboarding.route else Auth.Entry.route
 
     navigation(
         route = Graph.AUTHENTICATION,
         startDestination = startDestination
     ) {
-        composable(route = AuthScreen.Onboarding.route) {
+        composable(route = Auth.Onboarding.route) {
             OnBoardingScreen(
                 onSkipClick = {
-                    navController.navigate(AuthScreen.Entry.route)
+                    navController.navigate(Auth.Entry.route)
                 }
             )
         }
 
-        composable(route = AuthScreen.Entry.route) {
+        composable(route = Auth.Entry.route) {
             EntryScreen(
                 onAuthButtonClick = {
-                    navController.navigate(AuthScreen.Login.route)
+                    navController.navigate(Auth.Login.route)
                 },
                 onRegButtonClick = {
-                    navController.navigate(AuthScreen.SignUp.route)
+                    navController.navigate(Auth.SignUp.route)
                 }
             )
         }
 
-        composable(route = AuthScreen.Login.route) {
+        composable(route = Auth.Login.route) {
             val coroutineScope = rememberCoroutineScope()
 
             AuthorizationScreen(
@@ -55,8 +57,8 @@ fun NavGraphBuilder.authNavGraph(
                     }
                 },
                 onNoAccountTextClick = {
-                    navController.navigate(AuthScreen.SignUp.route) {
-                        popUpTo(AuthScreen.Entry.route) {
+                    navController.navigate(Auth.SignUp.route) {
+                        popUpTo(Auth.Entry.route) {
                             inclusive = false
                         }
                     }
@@ -64,11 +66,11 @@ fun NavGraphBuilder.authNavGraph(
             )
         }
 
-        composable(route = AuthScreen.SignUp.route) {
+        composable(route = Auth.SignUp.route) {
             RegistrationScreen(
                 onHaveAnAccountTextClick = {
-                    navController.navigate(AuthScreen.Login.route) {
-                        popUpTo(AuthScreen.Entry.route) {
+                    navController.navigate(Auth.Login.route) {
+                        popUpTo(Auth.Entry.route) {
                             inclusive = false
                         }
                     }
@@ -77,7 +79,7 @@ fun NavGraphBuilder.authNavGraph(
                     navController.navigate(
                         Graph.HOME
                     ) {
-                        popUpTo(AuthScreen.Entry.route) {
+                        popUpTo(Auth.Entry.route) {
                             inclusive = true
                         }
                     }
@@ -89,12 +91,11 @@ fun NavGraphBuilder.authNavGraph(
 
 }
 
-sealed class AuthScreen(val route: String) {
-    object Entry : AuthScreen(route = "ENTRY")
-    object Login : AuthScreen(route = "LOGIN")
-    object SignUp : AuthScreen(route = "SIGN_UP")
-
-    object Onboarding : AuthScreen(route = "ONBOARDING")
+sealed class Auth(val route: String) {
+    object Entry : Auth(route = "ENTRY")
+    object Login : Auth(route = "LOGIN")
+    object SignUp : Auth(route = "SIGN_UP")
+    object Onboarding : Auth(route = "ONBOARDING")
 
 }
 

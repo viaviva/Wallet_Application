@@ -1,5 +1,6 @@
 package com.angelina.wallet_application.screen.authorization
 
+import androidx.camera.core.ExperimentalGetImage
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,6 +21,7 @@ import com.angelina.wallet_application.ui.component.TextField
 import com.angelina.wallet_application.ui.component.TextWithDivider
 import com.angelina.wallet_application.ui.theme.Typography
 
+@ExperimentalGetImage
 @Composable
 fun AuthorizationScreen(
     onLogInButtonClick: () -> Unit,

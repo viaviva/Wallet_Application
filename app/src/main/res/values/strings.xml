@@ -41,5 +41,9 @@
     <string name="skip">Skip</string>
     <string name="done">Done</string>
 
+    <string name="addCard">Add card</string>
+    <string name="add">Add</string>
+    <string name="card_number">Card number</string>
+
 
 </resources>

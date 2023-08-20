@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.angelina.wallet_application.R
+import com.angelina.wallet_application.entity.firebase.ShopFirebase
 import com.angelina.wallet_application.ui.theme.Typography
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -56,7 +57,9 @@ fun ListCardsScreen(
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             items(listOfCards.value ?: arrayListOf()) {
-                CardItem(viewModel.getShopImage(it.idShop).toString()) {
+                CardItem(
+                    viewModel.getShop(it.idShop),
+                ) {
                     onItemClick(it.idCard)
                 }
             }
@@ -68,11 +71,9 @@ fun ListCardsScreen(
 
 @Composable
 fun CardItem(
-    image: String = " ",
+    shop: ShopFirebase,
     onCLick: () -> Unit = {}
 ) {
-    Log.e("image", image)
-
     Column(
         modifier = Modifier.selectable(
             true, onClick = onCLick
@@ -80,14 +81,14 @@ fun CardItem(
     ) {
         Column {
             AsyncImage(
-                model = image,
+                model = shop.imageUrl,
                 contentScale = ContentScale.FillWidth,
                 contentDescription = "",
                 modifier = Modifier
                     .clip(RoundedCornerShape(16.dp))
                     .width(178.dp)
                     .height(124.dp)
-                    .background(Color.Black)
+                    .background(Color(shop.color))
             )
         }
     }
