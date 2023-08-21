@@ -1,5 +1,6 @@
 package com.angelina.wallet_application.screen.addCard
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -23,7 +24,7 @@ class AddCardViewModel @Inject constructor(
 
     val listOfShops = arrayListOf<String>()
 
-    var countOfCards = MutableLiveData<Int>()
+    var maxId = MutableLiveData<Long>(0)
 
     var barcode by mutableStateOf("")
         private set
@@ -38,8 +39,10 @@ class AddCardViewModel @Inject constructor(
     }
 
     fun getCountOfCards() {
-        viewModelScope.launch {
-            countOfCards.postValue(cardRepository.getCountOfCards())
+        if (!sharedPreferenceRepository.getNoCards()) {
+            viewModelScope.launch {
+                maxId.postValue(cardRepository.getMaxId() + 1)
+            }
         }
     }
 
@@ -66,11 +69,13 @@ class AddCardViewModel @Inject constructor(
     fun setShop() = sharedPreferenceRepository.setShop(shop)
 
     fun addCard() {
+        Log.e("MAXID", maxId.value.toString())
         viewModelScope.launch {
-            if (countOfCards.value != null) {
+            if (maxId.value != null) {
+                sharedPreferenceRepository.setNoCards(false)
                 cardRepository.addCard(
                     Card(
-                        countOfCards.value!!.toLong(),
+                        maxId.value!!,
                         shop.toLong(),
                         barcode
                     )

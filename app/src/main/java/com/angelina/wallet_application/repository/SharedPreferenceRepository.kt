@@ -19,6 +19,8 @@ private const val DEFAULT_USERNAME = "username"
 private const val USER_ID = "user_id"
 private const val DEFAULT_USER_ID = "user_id"
 
+private const val NO_CARDS = "noCards"
+
 private const val SCANNER_OPEN = "scannerOpen"
 
 private const val SHOP = "shop"
@@ -78,6 +80,15 @@ class SharedPreferenceRepository @Inject constructor(
 
     fun getScanner(): Boolean =
         userPreferences?.getBoolean(SCANNER_OPEN, false) ?: false
+
+    fun setNoCards(isOpen: Boolean) {
+        userPreferences?.edit {
+            putBoolean(NO_CARDS, isOpen)
+        }
+    }
+
+    fun getNoCards(): Boolean =
+        userPreferences?.getBoolean(NO_CARDS, false) ?: false
 
     fun setShop(id: Int) {
         userPreferences?.edit {

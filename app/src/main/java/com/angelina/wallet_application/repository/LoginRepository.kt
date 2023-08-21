@@ -4,6 +4,7 @@ import android.util.Log
 import com.angelina.wallet_application.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.getValue
 import javax.inject.Inject
 
 class LoginRepository @Inject constructor(
@@ -30,12 +31,18 @@ class LoginRepository @Inject constructor(
 
                     database.child("users").child(it.uid).child("username").get()
                         .addOnSuccessListener { username ->
-
                             sharedPreferenceRepository.setUsername(username.value.toString())
-
                         }.addOnFailureListener {
                         Log.e("firebase", "Error getting data")
                     }
+
+                    database.child("users").child(it.uid).child("noCards").get()
+                        .addOnSuccessListener { noCards ->
+                            sharedPreferenceRepository.setNoCards(noCards.getValue<Boolean>() == true)
+                            Log.e("firebase", sharedPreferenceRepository.getNoCards().toString())
+                        }.addOnFailureListener {
+                            Log.e("firebase", "Error getting data")
+                        }
                 }
 
                 onSuccess()
@@ -62,6 +69,7 @@ class LoginRepository @Inject constructor(
                     sharedPreferenceRepository.run {
                         setIsUserLogIn()
                         setUserId(it.uid)
+                        setNoCards(true)
                     }
 
                     database.child("users").child(it.uid).setValue(User(username = username))

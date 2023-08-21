@@ -60,7 +60,12 @@ fun BottomNavGraph(navController: NavHostController) {
                 type = NavType.LongType
             })
         ) {
-            CardScreen(it.arguments?.getLong("id") ?: 0)
+            CardScreen(
+                it.arguments?.getLong("id") ?: 0,
+                onBackArrowClick = {
+                    navController.popBackStack()
+                }
+            )
         }
         composable(SCANNER_SCREEN) {
             ScannerScreen(

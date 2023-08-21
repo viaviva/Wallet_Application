@@ -6,6 +6,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
@@ -250,4 +251,40 @@ fun BackArrow(
             modifier = Modifier.padding(9.dp, 9.dp, 9.dp, 9.dp)
         )
     }
+}
+
+@Composable
+fun DeleteAlertDialog(
+    onDismissButtonClick: () -> Unit,
+    onConfirmButtonClick: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismissButtonClick,
+        title = {
+            Text(
+                text = stringResource(id = R.string.confirm_delete),
+                style = Typography.titleSmall,
+            )
+        },
+        confirmButton = {
+            Text(
+                text = stringResource(R.string.yes),
+                style = Typography.titleSmall,
+                modifier = Modifier.clickable {
+                    onConfirmButtonClick()
+                }
+            )
+        },
+        dismissButton = {
+            Text(
+                text = stringResource(R.string.no),
+                style = Typography.titleSmall,
+                modifier = Modifier
+                    .padding(end = 10.dp)
+                    .clickable {
+                    onDismissButtonClick()
+                }
+            )
+        }
+    )
 }

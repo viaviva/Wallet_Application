@@ -22,7 +22,7 @@ class ListCardsViewModel @Inject constructor(
 
     private val listOfShops = shopRepository.listOfShops
 
-    init {
+    fun getAllCards() {
         viewModelScope.async {
             listOfCards.postValue(cardRepository.getAllCards())
             Log.e("listOfCards.toString()", listOfCards.toString())

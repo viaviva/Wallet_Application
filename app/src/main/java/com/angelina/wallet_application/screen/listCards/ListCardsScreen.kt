@@ -37,6 +37,8 @@ fun ListCardsScreen(
 ) {
 
     val listOfCards = viewModel.listOfCards.observeAsState()
+    viewModel.getAllCards()
+
     Log.e("getAllCards", listOfCards.toString())
 
     Column(
@@ -58,7 +60,7 @@ fun ListCardsScreen(
         ) {
             items(listOfCards.value ?: arrayListOf()) {
                 CardItem(
-                    viewModel.getShop(it.idCard),
+                    viewModel.getShop(it.idShop),
                 ) {
                     onItemClick(it.idCard)
                 }
