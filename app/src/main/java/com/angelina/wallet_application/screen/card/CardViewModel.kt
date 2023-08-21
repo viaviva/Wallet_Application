@@ -14,12 +14,11 @@ import javax.inject.Inject
 class CardViewModel @Inject constructor(
     private val cardRepository: CardRepository,
     private val shopRepository: ShopRepository
-): ViewModel() {
+) : ViewModel() {
 
     val card = MutableLiveData<Card>()
 
     private val listOfShops = shopRepository.listOfShops
-
 
     fun getCard(id: Long) {
         viewModelScope.launch {
@@ -27,6 +26,6 @@ class CardViewModel @Inject constructor(
         }
     }
 
-    fun getShopImage(id: Long) = listOfShops.find { it.id == id }?.imageUrl
+    fun getShopImage(id: Long) = listOfShops.find { it.id == id }?.imageUrl ?: ""
 
 }

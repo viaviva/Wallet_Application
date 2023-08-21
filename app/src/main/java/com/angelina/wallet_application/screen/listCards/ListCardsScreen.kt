@@ -58,7 +58,7 @@ fun ListCardsScreen(
         ) {
             items(listOfCards.value ?: arrayListOf()) {
                 CardItem(
-                    viewModel.getShop(it.idShop),
+                    viewModel.getShop(it.idCard),
                 ) {
                     onItemClick(it.idCard)
                 }
