@@ -6,7 +6,8 @@ import com.angelina.wallet_application.model.Card
 
 fun CardFirebase.toCardEntity() =
     CardEntity(
-        idCard + 1,
+        0,
+        idCard,
         idShop,
         cardNumber,
         countOfClicks
@@ -14,7 +15,7 @@ fun CardFirebase.toCardEntity() =
 
 fun List<CardEntity>.toListCard() = map {
     Card(
-        it.id,
+        it.idCard,
         it.idShop,
         it.number,
         it.countOfClicks
@@ -24,6 +25,7 @@ fun List<CardEntity>.toListCard() = map {
 fun Card.toCardEntity() =
     CardEntity(
         idCard + 1,
+        idCard,
         idShop,
         cardNumber,
         countOfClicks
@@ -31,7 +33,7 @@ fun Card.toCardEntity() =
 
 fun CardEntity.toCard() =
     Card(
-        id,
+        idCard,
         idShop,
         number,
         countOfClicks

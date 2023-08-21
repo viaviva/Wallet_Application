@@ -11,6 +11,9 @@ data class CardEntity(
     @ColumnInfo(name = "id")
     val id: Long,
 
+    @ColumnInfo(name = "idCard")
+    val idCard: Long,
+
     @ColumnInfo(name = "idShop")
     val idShop: Long,
 

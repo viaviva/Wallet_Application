@@ -28,4 +28,9 @@ class CardViewModel @Inject constructor(
 
     fun getShopImage(id: Long) = listOfShops.find { it.id == id }?.imageUrl ?: ""
 
+    fun deleteCard(id: Long) {
+        viewModelScope.launch {
+            cardRepository.deleteCard(id)
+        }
+    }
 }

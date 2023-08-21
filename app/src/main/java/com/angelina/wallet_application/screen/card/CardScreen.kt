@@ -1,15 +1,25 @@
 package com.angelina.wallet_application.screen
 
 import android.graphics.Bitmap
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -25,6 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -33,6 +44,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.angelina.wallet_application.screen.card.CardViewModel
 import com.angelina.wallet_application.ui.component.BackArrow
+import com.angelina.wallet_application.ui.component.DeleteAlertDialog
 import com.angelina.wallet_application.ui.theme.Typography
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
@@ -44,8 +56,13 @@ import kotlinx.coroutines.launch
 @Composable
 fun CardScreen(
     id: Long,
+    onBackArrowClick: () -> Unit,
     viewModel: CardViewModel = hiltViewModel()
 ) {
+
+    var expanded by remember { mutableStateOf(false) }
+    var openDialog = remember { mutableStateOf(false) }
+
 
     val card = viewModel.card.observeAsState()
     viewModel.getCard(id)
@@ -57,9 +74,32 @@ fun CardScreen(
             .fillMaxSize()
     ) {
 
-        BackArrow(
-//            onClick = { onBackArrowClick() }
-        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            BackArrow(
+                onClick = { onBackArrowClick() }
+            )
+
+            Box {
+                IconButton(onClick = { expanded = true }) {
+                    Icon(Icons.Default.MoreVert, contentDescription = "")
+                }
+                DropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false }
+                ) {
+                    Text(
+                        "Удалить",
+                        fontSize = 18.sp,
+                        modifier = Modifier
+                            .padding(horizontal = 10.dp)
+                            .clickable(onClick = { openDialog.value = true })
+                    )
+                }
+            }
+        }
 
         Column(
             modifier = Modifier.padding(vertical = 22.dp)
@@ -76,7 +116,6 @@ fun CardScreen(
                     .background(Color.Black)
             )
 
-
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -89,9 +128,10 @@ fun CardScreen(
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
 
-                Column(modifier = Modifier
-                    .clip(RoundedCornerShape(16.dp))
-                    .align(Alignment.CenterHorizontally)
+                Column(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(16.dp))
+                        .align(Alignment.CenterHorizontally)
                 ) {
 
                     Image(
@@ -114,6 +154,19 @@ fun CardScreen(
             }
         }
 
+    }
+
+    val content = LocalContext.current
+
+    if (openDialog.value) {
+        DeleteAlertDialog(
+            onDismissButtonClick = { openDialog.value = false },
+            onConfirmButtonClick = {
+                viewModel.deleteCard(id)
+                onBackArrowClick()
+                Toast.makeText(content, "Карта удалена", Toast.LENGTH_LONG).show()
+            }
+        )
     }
 }
 

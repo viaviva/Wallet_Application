@@ -23,7 +23,10 @@ interface CardDao {
     @Query("SELECT * FROM card")
     suspend fun getAllCards(): List<CardEntity>
 
-    @Query("SELECT * FROM card WHERE id = :id")
+    @Query("SELECT * FROM card WHERE idCard = :id")
     suspend fun getCard(id: String): CardEntity
+
+    @Query("SELECT * FROM card ORDER BY idCard DESC LIMIT 1")
+    suspend fun getCardMaxId(): CardEntity
 
 }
