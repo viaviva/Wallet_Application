@@ -47,9 +47,14 @@
     <string name="confirm_delete">Уверены, что хотите удалить карту?</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
+    <string name="card_data">Данные карты</string>
+    <string name="card_deleted">Карта удалена</string>
+    <string name="delete">Удалить</string>
 
     <string name="username"> Имя</string>
     <string name="email_profile">Email</string>
     <string name="cards">Карты</string>
+    <string name="log_out">Выйти</string>
+
 
 </resources>

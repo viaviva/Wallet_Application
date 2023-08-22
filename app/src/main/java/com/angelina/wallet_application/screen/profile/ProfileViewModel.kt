@@ -17,7 +17,7 @@ class ProfileViewModel @Inject constructor(
     private val loginRepository: LoginRepository
 ) : ViewModel() {
 
-    var countOfCards = MutableLiveData<String>("0")
+    var countOfCards = MutableLiveData("0")
 
     fun getUsername() = sharedPreferenceRepository.getUsername()
 

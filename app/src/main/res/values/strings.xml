@@ -48,9 +48,13 @@
     <string name="confirm_delete">Are you sure you want to delete the card?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="card_data">Card data</string>
+    <string name="card_deleted">Card deleted</string>
+    <string name="delete">Delete</string>
 
     <string name="username"> Username</string>
     <string name="email_profile">Email</string>
     <string name="cards">Cards</string>
+    <string name="log_out">Log out</string>
 
 </resources>

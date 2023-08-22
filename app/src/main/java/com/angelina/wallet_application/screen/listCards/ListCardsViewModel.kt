@@ -1,6 +1,5 @@
 package com.angelina.wallet_application.screen.listCards
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -25,7 +24,6 @@ class ListCardsViewModel @Inject constructor(
     fun getAllCards() {
         viewModelScope.async {
             listOfCards.postValue(cardRepository.getAllCards())
-            Log.e("listOfCards.toString()", listOfCards.toString())
         }.onAwait
     }
 

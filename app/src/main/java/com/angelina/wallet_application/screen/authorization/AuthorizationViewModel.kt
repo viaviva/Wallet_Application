@@ -26,6 +26,11 @@ class AuthorizationViewModel @Inject constructor(
     var password by mutableStateOf("")
         private set
 
+
+    val error = MutableLiveData<String>()
+
+    var successLogin: (() -> Unit)? = null
+
     fun updateEmail(input: String) {
         email = input
     }
@@ -33,11 +38,6 @@ class AuthorizationViewModel @Inject constructor(
     fun updatePassword(input: String) {
         password = input
     }
-
-
-    val error = MutableLiveData<String>()
-
-    var successLogin: (() -> Unit)? = null
 
     fun login() {
         loginRepository.login(email, password, {

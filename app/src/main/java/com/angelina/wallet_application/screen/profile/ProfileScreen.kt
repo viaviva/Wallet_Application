@@ -55,6 +55,7 @@ fun ProfileScreen(
                 .padding(vertical = 20.dp)
                 .align(Alignment.End)
         ) {
+
             IconButton(onClick = { expanded = true }) {
                 Icon(Icons.Default.MoreVert, contentDescription = "")
             }
@@ -63,21 +64,20 @@ fun ProfileScreen(
                 onDismissRequest = { expanded = false }
             ) {
                 Text(
-                    "Удалить профиль",
+                    stringResource(id = R.string.delete),
                     fontSize = 18.sp,
                     modifier = Modifier
                         .padding(horizontal = 10.dp)
                         .clickable(onClick = {
                             onLogOutClick()
                             viewModel.deleteUser()
-                        }
-                        )
+                        })
                 )
 
                 Divider(modifier = Modifier.padding(vertical = 12.dp))
 
                 Text(
-                    "Выйти",
+                    stringResource(id = R.string.log_out),
                     fontSize = 18.sp,
                     modifier = Modifier
                         .padding(horizontal = 10.dp)
@@ -95,82 +95,95 @@ fun ProfileScreen(
             modifier = Modifier.padding(top = 28.dp, bottom = 20.dp)
         )
 
-        Surface(
+        UserData(
+            username = viewModel.getUsername(),
+            email = viewModel.getEmail(),
+            countOfCards = countOfCards.value.toString()
+        )
+
+    }
+
+}
+
+@Composable
+fun UserData(
+    username: String,
+    email: String,
+    countOfCards: String
+) {
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth(),
+        shape = RoundedCornerShape(20.dp),
+        shadowElevation = 7.dp,
+        color = Color.White
+    ) {
+
+        Column(
             modifier = Modifier
-                .fillMaxWidth(),
-            shape = RoundedCornerShape(20.dp),
-            shadowElevation = 7.dp,
-            color = Color.White
+                .padding(horizontal = 16.dp)
+                .padding(vertical = 16.dp)
         ) {
 
-            Column(
-                modifier = Modifier
-                    .padding(horizontal = 16.dp)
-                    .padding(vertical = 16.dp)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
+                Text(
+                    text = stringResource(id = R.string.username),
+                    style = Typography.titleMedium,
+                    fontSize = 17.sp,
+                    modifier = Modifier.padding(bottom = 12.dp)
+                )
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.username),
-                        style = Typography.titleMedium,
-                        fontSize = 17.sp,
-                        modifier = Modifier.padding(bottom = 12.dp)
-                    )
+                Text(
+                    text = username,
+                    style = Typography.titleSmall,
+                    modifier = Modifier.padding(bottom = 12.dp)
+                )
+            }
 
-                    Text(
-                        text = viewModel.getUsername(),
-                        style = Typography.titleSmall,
-                        modifier = Modifier.padding(bottom = 12.dp)
-                    )
-                }
+            Divider()
 
-                Divider()
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = stringResource(id = R.string.email_profile),
+                    style = Typography.titleMedium,
+                    fontSize = 17.sp,
+                    modifier = Modifier.padding(vertical = 12.dp)
+                )
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.email_profile),
-                        style = Typography.titleMedium,
-                        fontSize = 17.sp,
-                        modifier = Modifier.padding(vertical = 12.dp)
-                    )
+                Text(
+                    text = email,
+                    style = Typography.titleSmall,
+                    modifier = Modifier.padding(vertical = 12.dp)
+                )
+            }
 
-                    Text(
-                        text = viewModel.getEmail(),
-                        style = Typography.titleSmall,
-                        modifier = Modifier.padding(vertical = 12.dp)
-                    )
-                }
+            Divider()
 
-                Divider()
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = stringResource(id = R.string.cards),
+                    style = Typography.titleMedium,
+                    fontSize = 17.sp,
+                    modifier = Modifier.padding(top = 12.dp)
+                )
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.cards),
-                        style = Typography.titleMedium,
-                        fontSize = 17.sp,
-                        modifier = Modifier.padding(top = 12.dp)
-                    )
-
-                    Text(
-                        text = countOfCards.value.toString(),
-                        style = Typography.titleSmall,
-                        modifier = Modifier.padding(top = 12.dp)
-                    )
-                }
-
+                Text(
+                    text = countOfCards,
+                    style = Typography.titleSmall,
+                    modifier = Modifier.padding(top = 12.dp)
+                )
             }
 
         }
 
     }
-
 }

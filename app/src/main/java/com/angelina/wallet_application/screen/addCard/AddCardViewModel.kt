@@ -1,6 +1,5 @@
 package com.angelina.wallet_application.screen.addCard
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -69,12 +68,11 @@ class AddCardViewModel @Inject constructor(
     fun setShop() = sharedPreferenceRepository.setShop(shop)
 
     fun addCard() {
-        Log.e("MAXID", maxId.value.toString())
         viewModelScope.launch {
             if (maxId.value != null) {
                 sharedPreferenceRepository.setNoCards(false)
                 cardRepository.setNoCards()
-                
+
                 cardRepository.addCard(
                     Card(
                         maxId.value!!,

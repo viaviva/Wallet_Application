@@ -8,7 +8,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.angelina.wallet_application.screen.CardScreen
+import com.angelina.wallet_application.screen.card.CardScreen
 import com.angelina.wallet_application.screen.addCard.AddCardScreen
 import com.angelina.wallet_application.screen.listCards.ListCardsScreen
 import com.angelina.wallet_application.screen.profile.ProfileScreen

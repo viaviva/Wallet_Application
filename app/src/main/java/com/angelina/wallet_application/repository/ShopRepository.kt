@@ -18,27 +18,20 @@ class ShopRepository @Inject constructor(
     val listOfShops = arrayListOf<ShopFirebase>()
 
     init {
-        database.child("shops")
-            .addValueEventListener(object : ValueEventListener {
-
-                override fun onDataChange(p0: DataSnapshot) {
-                    Log.e("P0", p0.toString())
-
-                    if (p0.exists()) {
-                        for (i in p0.children) {
-                            val itm = i.getValue<ShopFirebase>()
-                            listOfShops.add(itm!!)
-                        }
-
-                        Log.e("LIST", listOfShops.toString())
-
-                    } else {
-                        Log.e("NEW", "Unknown error occurred")
+        database.child("shops").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.exists()) {
+                    for (i in p0.children) {
+                        val itm = i.getValue<ShopFirebase>()
+                        listOfShops.add(itm!!)
                     }
+                } else {
+                    Log.e("NEW", "Unknown error occurred")
                 }
+            }
 
-                override fun onCancelled(error: DatabaseError) {}
-            })
+            override fun onCancelled(error: DatabaseError) {}
+        })
     }
 
 }
