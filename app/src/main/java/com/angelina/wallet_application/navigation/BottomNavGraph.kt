@@ -2,6 +2,7 @@ package com.angelina.wallet_application.navigation
 
 import androidx.camera.core.ExperimentalGetImage
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -10,8 +11,10 @@ import androidx.navigation.navArgument
 import com.angelina.wallet_application.screen.CardScreen
 import com.angelina.wallet_application.screen.addCard.AddCardScreen
 import com.angelina.wallet_application.screen.listCards.ListCardsScreen
+import com.angelina.wallet_application.screen.profile.ProfileScreen
 import com.angelina.wallet_application.screen.scanner.ScannerScreen
 import com.angelina.wallet_application.ui.component.BottomBarScreen
+import kotlinx.coroutines.launch
 
 const val ITEM_SCREEN = "itemScreen"
 const val SCANNER_SCREEN = "scannerScreen"
@@ -52,7 +55,17 @@ fun BottomNavGraph(navController: NavHostController) {
             )
         }
         composable(BottomBarScreen.Profile.route) {
-            ListCardsScreen()
+            val coroutineScope = rememberCoroutineScope()
+
+            ProfileScreen(
+                onLogOutClick = {
+                    coroutineScope.launch {
+                        navController.navigate(
+                            Graph.AUTHENTICATION
+                        )
+                    }
+                }
+            )
         }
         composable(
             "$ITEM_SCREEN/{id}",

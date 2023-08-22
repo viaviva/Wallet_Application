@@ -92,7 +92,7 @@ fun AddCardScreen(
             }
         ) { barcode -> viewModel.updateBarcode(barcode) }
 
-        CommonButton(text = R.string.add, topPadding = 32.dp, bottomPadding = 22.dp,
+        CommonButton(text = R.string.add, topPadding = 40.dp, bottomPadding = 22.dp,
             onClick = {
                 viewModel.addCard()
                 onAddCardButtonClick()

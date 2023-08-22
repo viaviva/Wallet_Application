@@ -48,4 +48,8 @@
     <string name="yes">Да</string>
     <string name="no">Нет</string>
 
+    <string name="username"> Имя</string>
+    <string name="email_profile">Email</string>
+    <string name="cards">Карты</string>
+
 </resources>

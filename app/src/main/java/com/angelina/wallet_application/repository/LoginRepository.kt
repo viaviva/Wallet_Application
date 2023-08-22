@@ -25,7 +25,8 @@ class LoginRepository @Inject constructor(
 
                 user?.let {
                     sharedPreferenceRepository.run {
-                        setIsUserLogIn()
+                        setIsUserLogIn(true)
+                        setEmail(it.email.toString())
                         setUserId(it.uid)
                     }
 
@@ -33,8 +34,8 @@ class LoginRepository @Inject constructor(
                         .addOnSuccessListener { username ->
                             sharedPreferenceRepository.setUsername(username.value.toString())
                         }.addOnFailureListener {
-                        Log.e("firebase", "Error getting data")
-                    }
+                            Log.e("firebase", "Error getting data")
+                        }
 
                     database.child("users").child(it.uid).child("noCards").get()
                         .addOnSuccessListener { noCards ->
@@ -67,8 +68,9 @@ class LoginRepository @Inject constructor(
 
                 user?.let {
                     sharedPreferenceRepository.run {
-                        setIsUserLogIn()
+                        setIsUserLogIn(true)
                         setUserId(it.uid)
+                        setEmail(it.email.toString())
                         setNoCards(true)
                     }
 
@@ -89,4 +91,19 @@ class LoginRepository @Inject constructor(
             }
         }
     }
+
+    fun logOut() {
+        auth.signOut()
+        sharedPreferenceRepository.clearUserPreference()
+    }
+
+    fun deleteUser() {
+        auth.currentUser!!.delete().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Log.d("DELETE USER", "User account deleted.")
+            }
+        }
+        sharedPreferenceRepository.clearUserPreference()
+    }
+
 }

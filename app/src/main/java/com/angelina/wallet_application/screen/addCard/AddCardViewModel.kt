@@ -73,6 +73,8 @@ class AddCardViewModel @Inject constructor(
         viewModelScope.launch {
             if (maxId.value != null) {
                 sharedPreferenceRepository.setNoCards(false)
+                cardRepository.setNoCards()
+                
                 cardRepository.addCard(
                     Card(
                         maxId.value!!,

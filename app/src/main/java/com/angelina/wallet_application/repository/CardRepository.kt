@@ -94,4 +94,10 @@ class CardRepository @Inject constructor(
             .child(id.toString()).removeValue()
     }
 
+    fun setNoCards() =
+        database.child("users").child(sharedPreferenceRepository.getUserId()).child("noCards")
+            .setValue(false)
+
+    suspend fun deleteAllCards() = cardDao.deleteAllCards()
+
 }
