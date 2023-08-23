@@ -1,8 +1,8 @@
 <resources>
 
-    <string name="app_name">LoyaltyApk</string>
+    <string name="app_name">Wallet</string>
 
-    <string name="application_name">Loyalty system</string>
+    <string name="application_name">Wallet</string>
     <string name="slogan_text">All establishments in one place and under your control!</string>
     <string name="authorization">Authorization</string>
     <string name="registration">Registration</string>
@@ -13,7 +13,7 @@
     <string name="enter">Enter</string>
     <string name="get_the_code">Get the code</string>
 
-    <string name="password_validation">at least 8 characters</string>
+    <string name="password_validation">at least 6 characters</string>
     <string name="confirm_new_password">Confirm new password</string>
     <string name="repeat_password">repeat password</string>
     <string name="have_an_account">Already have an account?</string>
@@ -44,9 +44,22 @@
     <string name="addCard">Add card</string>
     <string name="add">Add</string>
     <string name="card_number">Card number</string>
+    <string name="shops">Shops</string>
 
     <string name="confirm_delete">Are you sure you want to delete the card?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="card_data">Card data</string>
+    <string name="card_deleted">Card deleted</string>
+    <string name="delete">Delete</string>
+
+    <string name="username"> Username</string>
+    <string name="email_profile">Email</string>
+    <string name="cards">Cards</string>
+    <string name="log_out">Log out</string>
+
+    <string name="no_internet">No Internet connection</string>
+    <string name="fill_fields">Fill all fields</string>
+    <string name="incorrect_fields">Incorrect fields</string>
 
 </resources>

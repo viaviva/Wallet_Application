@@ -8,6 +8,9 @@ import com.angelina.wallet_application.util.toCard
 import com.angelina.wallet_application.util.toCardEntity
 import com.angelina.wallet_application.util.toCardFirebase
 import com.angelina.wallet_application.util.toListCard
+import com.angelina.wallet_application.util.toNoCards
+import com.angelina.wallet_application.util.toUserCard
+import com.angelina.wallet_application.util.toUserCards
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -29,46 +32,35 @@ class CardRepository @Inject constructor(
     val listOfCards = MutableStateFlow(arrayListOf<CardFirebase>())
 
     fun getCardsFromFirebase() {
-        database.child("users").child(sharedPreferenceRepository.getUserId()).child("cards")
-            .addListenerForSingleValueEvent(object : ValueEventListener {
+        Log.e("SP", sharedPreferenceRepository.getUserId())
+        database.toUserCards(sharedPreferenceRepository.getUserId()).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(p0: DataSnapshot) {
+                val list = arrayListOf<CardFirebase>()
 
-                override fun onDataChange(p0: DataSnapshot) {
-                    val list = arrayListOf<CardFirebase>()
-                    Log.e("LIST", list.toString())
-                    Log.e("LIST", p0.toString())
-
-                    if (p0.exists()) {
-                        for (i in p0.children) {
-                            val itm = i.getValue(CardFirebase::class.java)
-                            list.add(itm!!)
-                        }
-                        Log.e("LIST", "Data fetched successfully")
-                        Log.e("NEW", list.toString())
-
-                        GlobalScope.launch {
-                            Log.e("LIST 2", listOfCards.value.toString())
-                            listOfCards.emit(list)
-                            Log.e("DATA", listOfCards.value.toString())
-                            putCardsIntoRoom()
-                        }
-                    } else {
-                        Log.e("NEW", "Unknown error occurred")
+                if (p0.exists()) {
+                    for (i in p0.children) {
+                        val itm = i.getValue(CardFirebase::class.java)
+                        list.add(itm!!)
                     }
+
+                    GlobalScope.launch {
+                        listOfCards.emit(list)
+                        Log.e("LIST OF CARDS", listOfCards.value.toString())
+                        putCardsIntoRoom()
+                    }
+                } else {
+                    Log.e("NEW", "Unknown error occurred")
                 }
+            }
 
-                override fun onCancelled(error: DatabaseError) {}
-            })
-
+            override fun onCancelled(error: DatabaseError) {}
+        })
     }
 
     suspend fun putCardsIntoRoom() {
-        Log.e("ROOM", listOfCards.value.toString())
-
         listOfCards.value.forEach {
             GlobalScope.async {
-                Log.e("LIST OF CARDS", it.toString())
                 cardDao.insertCard(it.toCardEntity())
-                Log.e("LIST OF CARDS DONE", it.toString())
             }.onAwait
         }
     }
@@ -81,17 +73,19 @@ class CardRepository @Inject constructor(
 
     suspend fun addCard(card: Card) {
         cardDao.insertCard(card.toCardEntity())
-
-        database.child("users").child(sharedPreferenceRepository.getUserId()).child("cards")
-            .child(card.idCard.toString()).setValue(card.toCardFirebase())
+        database.toUserCard(sharedPreferenceRepository.getUserId(), card.idCard.toString()).setValue(card.toCardFirebase())
     }
 
     suspend fun deleteCard(id: Long) {
         val card = getCard(id.toString())
 
         cardDao.deleteNote(card.toCardEntity())
-        database.child("users").child(sharedPreferenceRepository.getUserId()).child("cards")
-            .child(id.toString()).removeValue()
+        database.toUserCard(sharedPreferenceRepository.getUserId(), id.toString()).removeValue()
     }
+
+    fun setNoCards() =
+        database.toNoCards(sharedPreferenceRepository.getUserId()).setValue(false)
+
+    suspend fun deleteAllCards() = cardDao.deleteAllCards()
 
 }

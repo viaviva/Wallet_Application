@@ -1,5 +1,6 @@
 package com.angelina.wallet_application.screen.authorization
 
+import android.widget.Toast
 import androidx.camera.core.ExperimentalGetImage
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -29,7 +31,20 @@ fun AuthorizationScreen(
     viewModel: AuthorizationViewModel = hiltViewModel()
 ) {
 
-    viewModel.successLogin = onLogInButtonClick
+    val context = LocalContext.current
+
+    val noInternetConnection = stringResource(id = R.string.no_internet)
+    val fillFields = stringResource(id = R.string.fill_fields)
+    val incorrectFields = stringResource(id = R.string.incorrect_fields)
+
+    viewModel.run {
+        noInternet = { Toast.makeText(context, noInternetConnection, Toast.LENGTH_LONG).show() }
+        emptyFields = { Toast.makeText(context, fillFields, Toast.LENGTH_LONG).show() }
+        errorData = { Toast.makeText(context, incorrectFields, Toast.LENGTH_LONG).show() }
+
+        successLogin = onLogInButtonClick
+    }
+
 
     Column(
         modifier = Modifier
@@ -47,8 +62,7 @@ fun AuthorizationScreen(
             viewModel.email,
             R.string.email,
             R.string.email_example,
-            12.dp,
-            isVerified = true
+            12.dp
         ) { email -> viewModel.updateEmail(email) }
 
         TextField(

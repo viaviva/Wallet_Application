@@ -1,6 +1,5 @@
 package com.angelina.wallet_application.screen.addCard
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -11,6 +10,7 @@ import com.angelina.wallet_application.model.Card
 import com.angelina.wallet_application.repository.CardRepository
 import com.angelina.wallet_application.repository.SharedPreferenceRepository
 import com.angelina.wallet_application.repository.ShopRepository
+import com.angelina.wallet_application.validation.textFieldValidation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -31,6 +31,13 @@ class AddCardViewModel @Inject constructor(
 
     var shop by mutableStateOf(-1)
         private set
+
+
+    var isNumberError by mutableStateOf(textFieldValidation(barcode.trim()))
+
+    var emptyFields: (() -> Unit)? = null
+
+    var errorData: (() -> Unit)? = null
 
     init {
         shopRepository.listOfShops.forEach {
@@ -69,18 +76,39 @@ class AddCardViewModel @Inject constructor(
     fun setShop() = sharedPreferenceRepository.setShop(shop)
 
     fun addCard() {
-        Log.e("MAXID", maxId.value.toString())
-        viewModelScope.launch {
-            if (maxId.value != null) {
-                sharedPreferenceRepository.setNoCards(false)
-                cardRepository.addCard(
-                    Card(
-                        maxId.value!!,
-                        shop.toLong(),
-                        barcode
+        if (isFieldsNoEmpty() && errorData()) {
+            viewModelScope.launch {
+                if (maxId.value != null) {
+                    sharedPreferenceRepository.setNoCards(false)
+                    cardRepository.setNoCards()
+
+                    cardRepository.addCard(
+                        Card(
+                            maxId.value!!,
+                            shop.toLong(),
+                            barcode
+                        )
                     )
-                )
+                }
             }
+        }
+    }
+
+    private fun isFieldsNoEmpty(): Boolean {
+        return if (barcode.isNotEmpty()) {
+            true
+        } else {
+            emptyFields?.invoke()
+            false
+        }
+    }
+
+    private fun errorData(): Boolean {
+        return if (isNumberError || (shop == -1)) {
+            errorData?.invoke()
+            false
+        } else {
+            true
         }
     }
 

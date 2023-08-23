@@ -11,6 +11,7 @@ private const val USER_PREF_FILE = "userPrefFile"
 private const val SHARED_PREF_FILE = "sharedPrefFile"
 
 private const val IS_FIRST_OPEN = "isFirstOpen"
+private const val IS_NO_INTERNET ="isNoInternet"
 private const val IS_USER_LOG_IN = "isLogIn"
 
 private const val USERNAME = "username"
@@ -18,6 +19,9 @@ private const val DEFAULT_USERNAME = "username"
 
 private const val USER_ID = "user_id"
 private const val DEFAULT_USER_ID = "user_id"
+
+private const val EMAIL = "email"
+private const val DEFAULT_EMAIL = "email"
 
 private const val NO_CARDS = "noCards"
 
@@ -44,11 +48,19 @@ class SharedPreferenceRepository @Inject constructor(
         }
     }
 
+    fun getIsNoInternet(): Boolean = sharedPreferences?.getBoolean(IS_NO_INTERNET, false) ?: false
+
+    fun setIsNoInternet(value: Boolean) {
+        sharedPreferences?.edit {
+            putBoolean(IS_NO_INTERNET, value)
+        }
+    }
+
     fun getIsFirstOpen(): Boolean = sharedPreferences?.getBoolean(IS_FIRST_OPEN, false) ?: false
 
-    fun setIsUserLogIn() {
+    fun setIsUserLogIn(isLogin: Boolean) {
         userPreferences?.edit {
-            putBoolean(IS_USER_LOG_IN, true)
+            putBoolean(IS_USER_LOG_IN, isLogin)
         }
     }
 
@@ -99,5 +111,19 @@ class SharedPreferenceRepository @Inject constructor(
     fun getShop(): Int =
         userPreferences?.getInt(SHOP, -1) ?: -1
 
+    fun setEmail(email: String) {
+        userPreferences?.edit {
+            putString(EMAIL, email)
+        }
+    }
+
+    fun getEmail(): String =
+        userPreferences?.getString(EMAIL, DEFAULT_EMAIL) ?: DEFAULT_EMAIL
+
+    fun clearUserPreference() {
+        userPreferences?.edit {
+            clear()
+        }
+    }
 
 }

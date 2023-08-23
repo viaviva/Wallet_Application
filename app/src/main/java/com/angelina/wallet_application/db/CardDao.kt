@@ -29,4 +29,7 @@ interface CardDao {
     @Query("SELECT * FROM card ORDER BY idCard DESC LIMIT 1")
     suspend fun getCardMaxId(): CardEntity
 
+    @Query("DELETE FROM card")
+    suspend fun deleteAllCards()
+
 }

@@ -1,4 +1,4 @@
-package com.angelina.wallet_application.screen
+package com.angelina.wallet_application.screen.card
 
 import android.graphics.Bitmap
 import android.widget.Toast
@@ -37,12 +37,13 @@ import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
-import com.angelina.wallet_application.screen.card.CardViewModel
+import com.angelina.wallet_application.R
 import com.angelina.wallet_application.ui.component.BackArrow
 import com.angelina.wallet_application.ui.component.DeleteAlertDialog
 import com.angelina.wallet_application.ui.theme.Typography
@@ -61,8 +62,10 @@ fun CardScreen(
 ) {
 
     var expanded by remember { mutableStateOf(false) }
-    var openDialog = remember { mutableStateOf(false) }
+    val openDialog = remember { mutableStateOf(false) }
 
+    val content = LocalContext.current
+    val cardDeletedText = stringResource(id = R.string.card_deleted)
 
     val card = viewModel.card.observeAsState()
     viewModel.getCard(id)
@@ -91,7 +94,7 @@ fun CardScreen(
                     onDismissRequest = { expanded = false }
                 ) {
                     Text(
-                        "Удалить",
+                        stringResource(id = R.string.delete),
                         fontSize = 18.sp,
                         modifier = Modifier
                             .padding(horizontal = 10.dp)
@@ -122,7 +125,7 @@ fun CardScreen(
                     .padding(horizontal = 26.dp, vertical = 2.dp)
             ) {
                 Text(
-                    text = "Данные карты",
+                    text = stringResource(id = R.string.card_data),
                     style = Typography.labelMedium,
                     fontSize = 24.sp,
                     modifier = Modifier.align(Alignment.CenterHorizontally)
@@ -156,15 +159,13 @@ fun CardScreen(
 
     }
 
-    val content = LocalContext.current
-
     if (openDialog.value) {
         DeleteAlertDialog(
             onDismissButtonClick = { openDialog.value = false },
             onConfirmButtonClick = {
                 viewModel.deleteCard(id)
                 onBackArrowClick()
-                Toast.makeText(content, "Карта удалена", Toast.LENGTH_LONG).show()
+                Toast.makeText(content, cardDeletedText, Toast.LENGTH_LONG).show()
             }
         )
     }

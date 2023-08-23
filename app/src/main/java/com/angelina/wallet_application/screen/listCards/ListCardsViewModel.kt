@@ -1,6 +1,8 @@
 package com.angelina.wallet_application.screen.listCards
 
-import android.util.Log
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,12 +22,15 @@ class ListCardsViewModel @Inject constructor(
 
     val listOfCards = MutableLiveData<List<Card>>()
 
+    var stateRefresh by mutableStateOf(false)
+
     private val listOfShops = shopRepository.listOfShops
 
     fun getAllCards() {
+        stateRefresh = true
         viewModelScope.async {
             listOfCards.postValue(cardRepository.getAllCards())
-            Log.e("listOfCards.toString()", listOfCards.toString())
+            stateRefresh = false
         }.onAwait
     }
 

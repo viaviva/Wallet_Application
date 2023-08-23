@@ -7,9 +7,10 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.angelina.wallet_application.screen.CardScreen
 import com.angelina.wallet_application.screen.addCard.AddCardScreen
+import com.angelina.wallet_application.screen.card.CardScreen
 import com.angelina.wallet_application.screen.listCards.ListCardsScreen
+import com.angelina.wallet_application.screen.profile.ProfileScreen
 import com.angelina.wallet_application.screen.scanner.ScannerScreen
 import com.angelina.wallet_application.ui.component.BottomBarScreen
 
@@ -18,7 +19,10 @@ const val SCANNER_SCREEN = "scannerScreen"
 
 @ExperimentalGetImage
 @Composable
-fun BottomNavGraph(navController: NavHostController) {
+fun BottomNavGraph(
+    navController: NavHostController,
+    rootNavController: NavHostController
+) {
 
     NavHost(
         navController = navController,
@@ -52,7 +56,17 @@ fun BottomNavGraph(navController: NavHostController) {
             )
         }
         composable(BottomBarScreen.Profile.route) {
-            ListCardsScreen()
+            ProfileScreen(
+                onLogOutClick = {
+                    rootNavController.navigate(
+                        Graph.AUTHENTICATION
+                    ) {
+                        popUpTo(Auth.Entry.route) {
+                            inclusive = true
+                        }
+                    }
+                }
+            )
         }
         composable(
             "$ITEM_SCREEN/{id}",
@@ -78,6 +92,7 @@ fun BottomNavGraph(navController: NavHostController) {
                 }
             )
         }
+
     }
 }
 

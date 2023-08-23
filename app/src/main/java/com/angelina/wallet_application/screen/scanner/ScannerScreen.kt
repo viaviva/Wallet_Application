@@ -84,7 +84,7 @@ fun ScannerScreen(
                         imageAnalysis
                     )
                 } catch (e: Exception) {
-                    Log.d("TAG", "CameraPreview: ${e.localizedMessage}")
+                    Log.d("CAMERA", "CameraPreview: ${e.localizedMessage}")
                 }
             }, ContextCompat.getMainExecutor(context))
         }
