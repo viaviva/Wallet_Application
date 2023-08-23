@@ -15,7 +15,12 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -27,6 +32,9 @@ import coil.compose.AsyncImage
 import com.angelina.wallet_application.R
 import com.angelina.wallet_application.entity.firebase.ShopFirebase
 import com.angelina.wallet_application.ui.theme.Typography
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -36,34 +44,52 @@ fun ListCardsScreen(
 ) {
 
     val listOfCards = viewModel.listOfCards.observeAsState()
+    var refreshing by remember { mutableStateOf(false) }
+
     viewModel.getAllCards()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 22.dp)
+    LaunchedEffect(refreshing) {
+        if (refreshing) {
+            delay(1000)
+            refreshing = false
+        }
+    }
+
+    SwipeRefresh(
+        state = rememberSwipeRefreshState(isRefreshing = refreshing),
+        onRefresh = {
+            refreshing = true
+            viewModel.getAllCards()
+        }
     ) {
 
-        Text(
-            text = stringResource(id = R.string.my_cards),
-            style = Typography.titleMedium,
-            modifier = Modifier.padding(top = 30.dp, bottom = 20.dp)
-        )
-
-        LazyVerticalStaggeredGrid(
-            columns = StaggeredGridCells.Fixed(2),
-            verticalItemSpacing = 10.dp,
-            horizontalArrangement = Arrangement.spacedBy(10.dp)
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 22.dp)
         ) {
-            items(listOfCards.value ?: arrayListOf()) {
-                CardItem(
-                    viewModel.getShop(it.idShop),
-                ) {
-                    onItemClick(it.idCard)
+
+            Text(
+                text = stringResource(id = R.string.my_cards),
+                style = Typography.titleMedium,
+                modifier = Modifier.padding(top = 30.dp, bottom = 20.dp)
+            )
+
+            LazyVerticalStaggeredGrid(
+                columns = StaggeredGridCells.Fixed(2),
+                verticalItemSpacing = 10.dp,
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                items(listOfCards.value ?: arrayListOf()) {
+                    CardItem(
+                        viewModel.getShop(it.idShop),
+                    ) {
+                        onItemClick(it.idCard)
+                    }
                 }
             }
-        }
 
+        }
     }
 
 }
