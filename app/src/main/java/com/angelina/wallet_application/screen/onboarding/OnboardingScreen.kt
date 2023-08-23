@@ -35,11 +35,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.angelina.wallet_application.R
+import com.angelina.wallet_application.ui.theme.Typography
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
@@ -77,6 +76,7 @@ fun OnBoardingScreen(
             count = items.size,
             state = pageState,
             modifier = Modifier
+                .padding(horizontal = 14.dp)
                 .fillMaxHeight(0.9f)
                 .fillMaxWidth()
         ) { page ->
@@ -117,7 +117,12 @@ fun TopSection(
                 stringResource(id = R.string.done)
             }
 
-            Text(text = text, color = MaterialTheme.colorScheme.onBackground)
+            Text(
+                text = text,
+                style = Typography.titleSmall,
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.padding(end = 10.dp)
+            )
         }
     }
 }
@@ -142,7 +147,7 @@ fun BoxScope.Indicators(size: Int, index: Int) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
-        modifier = Modifier.align(Alignment.CenterStart)
+        modifier = Modifier.align(Alignment.Center)
     ) {
         repeat(size) {
             Indicator(isSelected = it == index)
@@ -187,23 +192,17 @@ fun OnBoardingItem(items: OnBoardingItems) {
 
         Text(
             text = stringResource(id = items.title),
-            style = MaterialTheme.typography.headlineMedium,
-            // fontSize = 24.sp,
+            style = Typography.titleMedium,
             color = MaterialTheme.colorScheme.onBackground,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center,
-            letterSpacing = 1.sp,
+            textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
             text = stringResource(id = items.desc),
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onBackground,
-            fontWeight = FontWeight.Light,
-            textAlign = TextAlign.Center,
+            style = Typography.titleSmall,
             modifier = Modifier.padding(10.dp),
-            letterSpacing = 1.sp,
+            textAlign = TextAlign.Center
         )
     }
 }
