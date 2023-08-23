@@ -40,7 +40,6 @@ fun AuthorizationScreen(
         successLogin = onLogInButtonClick
     }
 
-
     Column(
         modifier = Modifier
             .fillMaxSize()

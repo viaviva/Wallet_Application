@@ -32,7 +32,6 @@ class CardRepository @Inject constructor(
     val listOfCards = MutableStateFlow(arrayListOf<CardFirebase>())
 
     fun getCardsFromFirebase() {
-        Log.e("SP", sharedPreferenceRepository.getUserId())
         database.toUserCards(sharedPreferenceRepository.getUserId()).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 val list = arrayListOf<CardFirebase>()
@@ -45,7 +44,6 @@ class CardRepository @Inject constructor(
 
                     GlobalScope.launch {
                         listOfCards.emit(list)
-                        Log.e("LIST OF CARDS", listOfCards.value.toString())
                         putCardsIntoRoom()
                     }
                 } else {

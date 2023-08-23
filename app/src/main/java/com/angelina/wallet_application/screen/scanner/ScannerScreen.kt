@@ -30,6 +30,7 @@ fun ScannerScreen(
     onGetBarcode: (String) -> Unit = {},
     viewModel: ScannerViewModel = hiltViewModel()
 ) {
+
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     var preview by remember { mutableStateOf<Preview?>(null) }
@@ -89,4 +90,5 @@ fun ScannerScreen(
             }, ContextCompat.getMainExecutor(context))
         }
     )
+
 }

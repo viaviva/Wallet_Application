@@ -32,9 +32,6 @@ class AddCardViewModel @Inject constructor(
     var shop by mutableStateOf(-1)
         private set
 
-
-    var isNumberError by mutableStateOf(textFieldValidation(barcode.trim()))
-
     var emptyFields: (() -> Unit)? = null
 
     var errorData: (() -> Unit)? = null
@@ -104,7 +101,7 @@ class AddCardViewModel @Inject constructor(
     }
 
     private fun errorData(): Boolean {
-        return if (isNumberError || (shop == -1)) {
+        return if (textFieldValidation(barcode) || (shop == -1)) {
             errorData?.invoke()
             false
         } else {

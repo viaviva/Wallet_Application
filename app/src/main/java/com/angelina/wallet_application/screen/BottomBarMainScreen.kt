@@ -52,7 +52,6 @@ fun BottomBar(
     items: List<BottomBarScreen>
 ) {
 
-
     NavigationBar(
         tonalElevation = 0.dp,
         containerColor = Color.White,

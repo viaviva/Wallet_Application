@@ -81,7 +81,6 @@ fun TextField(
     isError: Boolean = false,
     onScannerButtonClick: () -> Unit = {},
     onValueChange: (String) -> Unit,
-//    isError: (Any) -> Unit
 ) {
 
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
@@ -116,7 +115,7 @@ fun TextField(
             }
 
             if (isScanner) {
-                val image = R.drawable.ic_scanner
+                val image = R.drawable.ic_scanner2
 
                 IconButton(
                     onClick = onScannerButtonClick
@@ -240,3 +239,4 @@ fun DeleteAlertDialog(
         }
     )
 }
+

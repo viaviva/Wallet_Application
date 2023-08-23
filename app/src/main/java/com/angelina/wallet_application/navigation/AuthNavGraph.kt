@@ -53,7 +53,11 @@ fun NavGraphBuilder.authNavGraph(
                     coroutineScope.launch {
                         navController.navigate(
                             Graph.HOME
-                        )
+                        ) {
+                            popUpTo(Auth.Entry.route) {
+                                inclusive = true
+                            }
+                        }
                     }
                 },
                 onNoAccountTextClick = {

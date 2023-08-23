@@ -35,6 +35,7 @@ fun BottomNavGraph(
                 navController.navigate("$ITEM_SCREEN/${it}")
             }
         }
+
         composable(
             BottomBarScreen.Catalog.route + "/{barcode}",
             arguments = listOf(navArgument("barcode") {
@@ -49,12 +50,13 @@ fun BottomNavGraph(
                 onAddCardButtonClick = {
                     navController.navigate(BottomBarScreen.MyCards.route) {
                         popUpTo(BottomBarScreen.MyCards.route) {
-                            inclusive = true
+                            inclusive = false
                         }
                     }
                 }
             )
         }
+
         composable(BottomBarScreen.Profile.route) {
             ProfileScreen(
                 onLogOutClick = {
@@ -62,12 +64,13 @@ fun BottomNavGraph(
                         Graph.AUTHENTICATION
                     ) {
                         popUpTo(Auth.Entry.route) {
-                            inclusive = true
+                            inclusive = false
                         }
                     }
                 }
             )
         }
+
         composable(
             "$ITEM_SCREEN/{id}",
             arguments = listOf(navArgument("id") {
@@ -81,6 +84,7 @@ fun BottomNavGraph(
                 }
             )
         }
+
         composable(SCANNER_SCREEN) {
             ScannerScreen(
                 onGetBarcode = {

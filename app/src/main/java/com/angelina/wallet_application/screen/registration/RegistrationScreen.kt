@@ -25,6 +25,7 @@ fun RegistrationScreen(
     onRegistrationButtonClick: () -> Unit,
     viewModel: RegistrationViewModel = hiltViewModel()
 ) {
+
     val context = LocalContext.current
     val noInternetConnection = stringResource(id = R.string.no_internet)
     val fillFields = stringResource(id = R.string.fill_fields)
@@ -92,8 +93,6 @@ fun RegistrationScreen(
 
     BottomText(
         R.string.have_an_account, R.string.enter
-    ) {
-        onHaveAnAccountTextClick()
-    }
+    ) { onHaveAnAccountTextClick() }
 
 }

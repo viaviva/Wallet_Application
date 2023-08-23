@@ -95,6 +95,7 @@ fun TopSection(
     onSkipClick: () -> Unit = {},
     isLastPage: Boolean
 ) {
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -125,6 +126,7 @@ fun TopSection(
             )
         }
     }
+
 }
 
 @Composable
@@ -170,9 +172,7 @@ fun Indicator(isSelected: Boolean) {
             .background(
                 color = if (isSelected) MaterialTheme.colorScheme.primary else Color(0XFFF8E2E7)
             )
-    ) {
-
-    }
+    ) {}
 }
 
 @Composable

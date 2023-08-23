@@ -3,7 +3,6 @@ package com.angelina.wallet_application.screen.registration
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.angelina.wallet_application.repository.LoginRepository
 import com.angelina.wallet_application.repository.SharedPreferenceRepository
@@ -27,8 +26,6 @@ class RegistrationViewModel @Inject constructor(
         private set
 
     private val emailRegex = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+".toRegex()
-
-    val isLoading = MutableLiveData<Boolean>()
 
     var noInternet: (() -> Unit)? = null
 
@@ -57,13 +54,10 @@ class RegistrationViewModel @Inject constructor(
     fun registration() {
         if (isFieldsNoEmpty() && errorData()) {
             if (sharedPreferenceRepository.getIsNoInternet()) {
-                isLoading.value = true
                 loginRepository.registration(
                     email, password, name, {
-                        isLoading.value = false
                         successRegistration?.invoke()
                     }, {
-                        isLoading.value = false
                         errorData?.invoke()
                     }
                 )
