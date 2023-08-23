@@ -18,4 +18,5 @@ class NetworkStatusRepository @Inject constructor(
         networkStatus.onNext(isConnected)
         sharedPreferenceRepository.setIsNoInternet(isConnected)
     }
+
 }

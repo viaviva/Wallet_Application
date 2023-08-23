@@ -47,6 +47,7 @@ import coil.compose.AsyncImage
 import com.angelina.wallet_application.R
 import com.angelina.wallet_application.ui.component.CommonButton
 import com.angelina.wallet_application.ui.component.TextField
+import com.angelina.wallet_application.ui.theme.Dimens
 import com.angelina.wallet_application.ui.theme.Typography
 
 @ExperimentalGetImage
@@ -136,7 +137,7 @@ fun <T> LargeDropdownMenu(
 
     Box(
         modifier = modifier
-            .padding(bottom = 12.dp)
+            .padding(bottom = Dimens.dp_12)
             .height(IntrinsicSize.Min)
     ) {
         Column {
@@ -144,7 +145,7 @@ fun <T> LargeDropdownMenu(
             Text(
                 text = label,
                 style = Typography.labelSmall,
-                modifier = Modifier.padding(bottom = 6.dp)
+                modifier = Modifier.padding(bottom = Dimens.sdp_6)
             )
 
             OutlinedTextField(
@@ -164,10 +165,10 @@ fun <T> LargeDropdownMenu(
                 readOnly = true,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(54.dp)
+                    .height(Dimens.sdp_54)
                     .border(
-                        shape = RoundedCornerShape(10.dp),
-                        width = 1.dp,
+                        shape = RoundedCornerShape(Dimens.sdp_10),
+                        width = Dimens.sdp_1,
                         color = Color.LightGray
                     )
             )
@@ -177,9 +178,9 @@ fun <T> LargeDropdownMenu(
         // Transparent clickable surface on top of OutlinedTextField
         Surface(
             modifier = Modifier
-                .padding(top = 25.dp)
-                .height(54.dp)
-                .clip(RoundedCornerShape(10.dp))
+                .padding(top = Dimens.sdp_26)
+                .height(Dimens.sdp_54)
+                .clip(RoundedCornerShape(Dimens.sdp_10))
                 .fillMaxSize()
                 .clickable(enabled = enabled) { expanded = true },
             color = Color.Transparent,
@@ -191,7 +192,7 @@ fun <T> LargeDropdownMenu(
             onDismissRequest = { expanded = false },
         ) {
             Surface(
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(Dimens.dp_12),
             ) {
                 val listState = rememberLazyListState()
                 if (selectedIndex > -1) {
@@ -250,13 +251,13 @@ fun LargeDropdownMenuItem(
         Row(modifier = Modifier
             .clickable(enabled) { onClick() }
             .fillMaxWidth()
-            .padding(16.dp)) {
+            .padding(Dimens.dp_16)) {
             AsyncImage(
                 model = "https://listovki.zabava.by/upload/iblock/3f0/3f0b29739dd7672614481f354e0bf336.png",
                 contentDescription = "",
                 modifier = Modifier
-                    .padding(end = 6.dp)
-                    .size(24.dp)
+                    .padding(end = Dimens.sdp_6)
+                    .size(Dimens.dp_24)
             )
             Text(
                 text = text,

@@ -33,4 +33,5 @@ class CardViewModel @Inject constructor(
             cardRepository.deleteCard(id)
         }
     }
+
 }

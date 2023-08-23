@@ -38,7 +38,6 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var networkStatusRepository: NetworkStatusRepository
 
-
     private val receiver = NetworkReceiver()
 
     protected val disposable = CompositeDisposable()

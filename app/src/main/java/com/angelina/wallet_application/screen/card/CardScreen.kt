@@ -40,12 +40,12 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.angelina.wallet_application.R
 import com.angelina.wallet_application.ui.component.BackArrow
 import com.angelina.wallet_application.ui.component.DeleteAlertDialog
+import com.angelina.wallet_application.ui.theme.Dimens
 import com.angelina.wallet_application.ui.theme.Typography
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
@@ -72,8 +72,8 @@ fun CardScreen(
 
     Column(
         modifier = Modifier
-            .padding(horizontal = 22.dp)
-            .padding(top = 22.dp)
+            .padding(horizontal = Dimens.sdp_22)
+            .padding(top = Dimens.sdp_22)
             .fillMaxSize()
     ) {
 
@@ -95,9 +95,9 @@ fun CardScreen(
                 ) {
                     Text(
                         stringResource(id = R.string.delete),
-                        fontSize = 18.sp,
+                        fontSize = Dimens.sp_18,
                         modifier = Modifier
-                            .padding(horizontal = 10.dp)
+                            .padding(horizontal = Dimens.sdp_10)
                             .clickable(onClick = { openDialog.value = true })
                     )
                 }
@@ -112,28 +112,28 @@ fun CardScreen(
                 contentScale = ContentScale.FillWidth,
                 contentDescription = "",
                 modifier = Modifier
-                    .padding(bottom = 16.dp)
-                    .clip(RoundedCornerShape(16.dp))
+                    .padding(bottom = Dimens.dp_16)
+                    .clip(RoundedCornerShape(Dimens.dp_16))
                     .fillMaxWidth()
-                    .height(204.dp)
+                    .height(Dimens.sdp_204)
                     .background(Color.Black)
             )
 
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 26.dp, vertical = 2.dp)
+                    .padding(horizontal = Dimens.sdp_26, vertical = Dimens.sdp_2)
             ) {
                 Text(
                     text = stringResource(id = R.string.card_data),
                     style = Typography.labelMedium,
-                    fontSize = 24.sp,
+                    fontSize = Dimens.sp_24,
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
 
                 Column(
                     modifier = Modifier
-                        .clip(RoundedCornerShape(16.dp))
+                        .clip(RoundedCornerShape(Dimens.dp_16))
                         .align(Alignment.CenterHorizontally)
                 ) {
 
@@ -142,15 +142,15 @@ fun CardScreen(
                         contentDescription = "",
                         contentScale = ContentScale.FillBounds,
                         modifier = Modifier
-                            .size(196.dp)
-                            .padding(all = 10.dp)
+                            .size(Dimens.sdp_196)
+                            .padding(all = Dimens.sdp_10)
                             .align(Alignment.CenterHorizontally),
                     )
 
                     Text(
                         text = card.value?.cardNumber.toString(),
                         style = Typography.labelMedium,
-                        fontSize = 20.sp,
+                        fontSize = Dimens.sp_20,
                         modifier = Modifier.align(Alignment.CenterHorizontally)
                     )
                 }
@@ -174,8 +174,8 @@ fun CardScreen(
 @Composable
 fun rememberQrBitmapPainter(
     content: String,
-    size: Dp = 150.dp,
-    padding: Dp = 0.dp
+    size: Dp = Dimens.sdp_150,
+    padding: Dp = Dimens.sdp_0
 ): BitmapPainter {
 
     val density = LocalDensity.current

@@ -38,6 +38,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.angelina.wallet_application.R
+import com.angelina.wallet_application.ui.theme.Dimens
 import com.angelina.wallet_application.ui.theme.Typography
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -76,7 +77,7 @@ fun OnBoardingScreen(
             count = items.size,
             state = pageState,
             modifier = Modifier
-                .padding(horizontal = 14.dp)
+                .padding(horizontal = Dimens.dp_14)
                 .fillMaxHeight(0.9f)
                 .fillMaxWidth()
         ) { page ->
@@ -95,10 +96,11 @@ fun TopSection(
     onSkipClick: () -> Unit = {},
     isLastPage: Boolean
 ) {
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(12.dp)
+            .padding(Dimens.dp_12)
     ) {
         // Back button
         IconButton(onClick = onBackClick, modifier = Modifier.align(Alignment.CenterStart)) {
@@ -109,7 +111,7 @@ fun TopSection(
         TextButton(
             onClick = onSkipClick,
             modifier = Modifier.align(Alignment.CenterEnd),
-            contentPadding = PaddingValues(0.dp)
+            contentPadding = PaddingValues(Dimens.sdp_0)
         ) {
             val text = if (!isLastPage) {
                 stringResource(id = R.string.skip)
@@ -121,10 +123,11 @@ fun TopSection(
                 text = text,
                 style = Typography.titleSmall,
                 color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.padding(end = 10.dp)
+                modifier = Modifier.padding(end = Dimens.sdp_10)
             )
         }
     }
+
 }
 
 @Composable
@@ -135,7 +138,7 @@ fun BottomSection(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(12.dp)
+            .padding(Dimens.dp_12)
     ) {
         // Indicators
         Indicators(size, index)
@@ -158,21 +161,19 @@ fun BoxScope.Indicators(size: Int, index: Int) {
 @Composable
 fun Indicator(isSelected: Boolean) {
     val width = animateDpAsState(
-        targetValue = if (isSelected) 25.dp else 10.dp,
+        targetValue = if (isSelected) Dimens.sdp_26 else Dimens.sdp_10,
         animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy)
     )
 
     Box(
         modifier = Modifier
-            .height(10.dp)
+            .height(Dimens.sdp_10)
             .width(width.value)
             .clip(CircleShape)
             .background(
                 color = if (isSelected) MaterialTheme.colorScheme.primary else Color(0XFFF8E2E7)
             )
-    ) {
-
-    }
+    ) {}
 }
 
 @Composable
@@ -185,10 +186,10 @@ fun OnBoardingItem(items: OnBoardingItems) {
         Image(
             painter = painterResource(id = items.image),
             contentDescription = "Image1",
-            modifier = Modifier.padding(start = 50.dp, end = 50.dp)
+            modifier = Modifier.padding(start = Dimens.sdp_50, end = Dimens.sdp_50)
         )
 
-        Spacer(modifier = Modifier.height(25.dp))
+        Spacer(modifier = Modifier.height(Dimens.sdp_26))
 
         Text(
             text = stringResource(id = items.title),
@@ -196,12 +197,12 @@ fun OnBoardingItem(items: OnBoardingItems) {
             color = MaterialTheme.colorScheme.onBackground,
             textAlign = TextAlign.Center
         )
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(Dimens.sdp_8))
 
         Text(
             text = stringResource(id = items.desc),
             style = Typography.titleSmall,
-            modifier = Modifier.padding(10.dp),
+            modifier = Modifier.padding(Dimens.sdp_10),
             textAlign = TextAlign.Center
         )
     }

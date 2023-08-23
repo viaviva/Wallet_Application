@@ -15,10 +15,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import com.angelina.wallet_application.R
 import com.angelina.wallet_application.ui.component.CommonButton
 import com.angelina.wallet_application.ui.theme.BorderButtonColor
+import com.angelina.wallet_application.ui.theme.Dimens
 import com.angelina.wallet_application.ui.theme.Typography
 
 @Composable
@@ -32,7 +32,7 @@ fun EntryScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .padding(horizontal = 26.dp)
+            .padding(horizontal = Dimens.sdp_26)
             .fillMaxSize()
     ) {
 
@@ -46,7 +46,7 @@ fun EntryScreen(
             text = stringResource(id = R.string.application_name),
             style = Typography.titleMedium,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(top = 18.dp, bottom = 22.dp)
+            modifier = Modifier.padding(top = Dimens.dp_18, bottom = Dimens.sdp_22)
         )
 
         Text(
@@ -54,8 +54,8 @@ fun EntryScreen(
             style = Typography.titleSmall,
             textAlign = TextAlign.Center,
             modifier = Modifier
-                .padding(bottom = 54.dp)
-                .width(260.dp)
+                .padding(bottom = Dimens.sdp_54)
+                .width(Dimens.sdp_260)
         )
 
         CommonButton(
@@ -69,7 +69,7 @@ fun EntryScreen(
             onClick = {
                 onRegButtonClick()
             },
-            topPadding = 16.dp,
+            topPadding = Dimens.dp_16,
             containerColor = Color.White,
             contentColor = Color.Black,
             borderColor = BorderButtonColor,

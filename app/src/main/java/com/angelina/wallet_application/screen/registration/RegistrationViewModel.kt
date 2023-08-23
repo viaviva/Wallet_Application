@@ -3,7 +3,6 @@ package com.angelina.wallet_application.screen.registration
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.angelina.wallet_application.repository.LoginRepository
 import com.angelina.wallet_application.repository.SharedPreferenceRepository
@@ -23,12 +22,8 @@ class RegistrationViewModel @Inject constructor(
         private set
     var password by mutableStateOf("")
         private set
-    var confirmPassword by mutableStateOf("")
-        private set
 
     private val emailRegex = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+".toRegex()
-
-    val isLoading = MutableLiveData<Boolean>()
 
     var noInternet: (() -> Unit)? = null
 
@@ -50,20 +45,13 @@ class RegistrationViewModel @Inject constructor(
         password = input
     }
 
-    fun updateConfirmPassword(input: String) {
-        confirmPassword = input
-    }
-
     fun registration() {
         if (isFieldsNoEmpty() && errorData()) {
             if (sharedPreferenceRepository.getIsNoInternet()) {
-                isLoading.value = true
                 loginRepository.registration(
                     email, password, name, {
-                        isLoading.value = false
                         successRegistration?.invoke()
                     }, {
-                        isLoading.value = false
                         errorData?.invoke()
                     }
                 )
@@ -74,7 +62,7 @@ class RegistrationViewModel @Inject constructor(
     }
 
     private fun isFieldsNoEmpty(): Boolean {
-        return if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
+        return if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
             true
         } else {
             emptyFields?.invoke()
@@ -83,8 +71,9 @@ class RegistrationViewModel @Inject constructor(
     }
 
     private fun errorData(): Boolean {
-        return if (textFieldValidation(password) && textFieldValidation(email) &&
-            password != confirmPassword && email.matches(emailRegex).not()
+        return if (textFieldValidation(password) && textFieldValidation(email) && email.matches(
+                emailRegex
+            ).not()
         ) {
             errorData?.invoke()
             false
