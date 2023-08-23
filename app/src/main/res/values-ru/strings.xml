@@ -35,8 +35,12 @@
     <string name="catalog">Каталог</string>
     <string name="profile">Профиль</string>
 
-    <string name="onbordingTitle1">Go beyond of new galaxy</string>
-    <string name="onboardingText1">Now explore the new galaxy and get knowledge about it.</string>
+    <string name="onboardingTitle1">Просканируйте карту</string>
+    <string name="onboardingText1">Просканируйте любую свою скидочную карту в пару мгновений</string>
+    <string name="onboardingTitle2">Добавьте карту</string>
+    <string name="onboardingText2">Выберите необходимые параметры и проверьте данные перед добавлением</string>
+    <string name="onboardingTitle3">Расплачивайтесь</string>
+    <string name="onboardingText3">При совершении покупки в магазинах открывайте наше приложение</string>
     <string name="skip">Пропустить</string>
     <string name="done">Готово</string>
 

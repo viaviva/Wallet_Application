@@ -10,9 +10,9 @@ class OnBoardingItems(
     companion object{
         fun getData(): List<OnBoardingItems>{
             return listOf(
-                OnBoardingItems(R.drawable.oboarding, R.string.onbordingTitle1, R.string.onboardingText1),
-                OnBoardingItems(R.drawable.oboarding, R.string.onbordingTitle1, R.string.onboardingText1),
-                OnBoardingItems(R.drawable.oboarding, R.string.onbordingTitle1, R.string.onboardingText1)
+                OnBoardingItems(R.drawable.oboarding, R.string.onboardingTitle1, R.string.onboardingText1),
+                OnBoardingItems(R.drawable.onboarding2, R.string.onboardingTitle2, R.string.onboardingText2),
+                OnBoardingItems(R.drawable.onboarding3, R.string.onboardingTitle3, R.string.onboardingText3)
             )
         }
     }

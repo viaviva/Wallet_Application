@@ -46,7 +46,7 @@ fun EntryScreen(
             text = stringResource(id = R.string.application_name),
             style = Typography.titleMedium,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(top = 38.dp, bottom = 22.dp)
+            modifier = Modifier.padding(top = 18.dp, bottom = 22.dp)
         )
 
         Text(
@@ -54,7 +54,7 @@ fun EntryScreen(
             style = Typography.titleSmall,
             textAlign = TextAlign.Center,
             modifier = Modifier
-                .padding(bottom = 84.dp)
+                .padding(bottom = 54.dp)
                 .width(260.dp)
         )
 

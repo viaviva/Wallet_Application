@@ -36,8 +36,12 @@
     <string name="catalog">Catalog</string>
     <string name="profile">Profile</string>
 
-    <string name="onbordingTitle1">Go beyond of new galaxy</string>
-    <string name="onboardingText1">Now explore the new galaxy and get knowledge about it.</string>
+    <string name="onboardingTitle1">Scan a card</string>
+    <string name="onboardingText1">Scan any of your discount cards in a couple of moments</string>
+    <string name="onboardingTitle2">Add card to app</string>
+    <string name="onboardingText2">Select the required options and check the data before adding</string>
+    <string name="onboardingTitle3">Get paid</string>
+    <string name="onboardingText3">When making a purchase in stores, open our application</string>
     <string name="skip">Skip</string>
     <string name="done">Done</string>
 

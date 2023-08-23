@@ -9,7 +9,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -32,7 +31,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.angelina.wallet_application.R
-import com.angelina.wallet_application.ui.theme.BorderTextFieldColor
+import com.angelina.wallet_application.ui.theme.Purple40
 import com.angelina.wallet_application.ui.theme.Typography
 import com.angelina.wallet_application.ui.theme.textFontFamily
 
@@ -117,7 +116,7 @@ fun TextField(
             }
 
             if (isScanner) {
-                val image = R.drawable.ic_verified
+                val image = R.drawable.ic_scanner
 
                 IconButton(
                     onClick = onScannerButtonClick
@@ -155,9 +154,9 @@ fun CommonButton(
     onClick: () -> Unit = {},
     topPadding: Dp = 0.dp,
     bottomPadding: Dp = 0.dp,
-    containerColor: Color = Color.Black,
+    containerColor: Color = Purple40,
     contentColor: Color = Color.White,
-    borderColor: Color = Color.Black,
+    borderColor: Color = Purple40,
     text: Int
 ) {
 
@@ -181,44 +180,6 @@ fun CommonButton(
         )
     }
 
-}
-
-@Composable
-fun TextWithDivider() {
-    Divider(
-        color = BorderTextFieldColor,
-        thickness = 1.dp,
-        modifier = Modifier.width(138.dp)
-    )
-    Text(
-        text = "или",
-        style = Typography.labelSmall,
-        modifier = Modifier.padding(horizontal = 10.dp),
-    )
-    Divider(
-        color = BorderTextFieldColor,
-        thickness = 1.dp,
-        modifier = Modifier.width(138.dp)
-    )
-}
-
-@Composable
-fun SignUpWithButton(
-    icon: Int
-) {
-    Surface(
-        shape = RoundedCornerShape(10.dp),
-        border = BorderStroke(width = 1.dp, color = BorderTextFieldColor),
-        color = Color.White,
-        modifier = Modifier.size(100.dp, 54.dp)
-    ) {
-        Icon(
-            painter = painterResource(id = icon),
-            contentDescription = "",
-            tint = Color.Unspecified,
-            modifier = Modifier.padding(horizontal = 40.dp, vertical = 16.dp)
-        )
-    }
 }
 
 @Composable
