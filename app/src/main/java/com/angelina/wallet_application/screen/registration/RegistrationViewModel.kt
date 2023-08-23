@@ -22,8 +22,6 @@ class RegistrationViewModel @Inject constructor(
         private set
     var password by mutableStateOf("")
         private set
-    var confirmPassword by mutableStateOf("")
-        private set
 
     private val emailRegex = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+".toRegex()
 
@@ -47,10 +45,6 @@ class RegistrationViewModel @Inject constructor(
         password = input
     }
 
-    fun updateConfirmPassword(input: String) {
-        confirmPassword = input
-    }
-
     fun registration() {
         if (isFieldsNoEmpty() && errorData()) {
             if (sharedPreferenceRepository.getIsNoInternet()) {
@@ -68,7 +62,7 @@ class RegistrationViewModel @Inject constructor(
     }
 
     private fun isFieldsNoEmpty(): Boolean {
-        return if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
+        return if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
             true
         } else {
             emptyFields?.invoke()
@@ -77,8 +71,9 @@ class RegistrationViewModel @Inject constructor(
     }
 
     private fun errorData(): Boolean {
-        return if (textFieldValidation(password) && textFieldValidation(email) &&
-            password != confirmPassword && email.matches(emailRegex).not()
+        return if (textFieldValidation(password) && textFieldValidation(email) && email.matches(
+                emailRegex
+            ).not()
         ) {
             errorData?.invoke()
             false

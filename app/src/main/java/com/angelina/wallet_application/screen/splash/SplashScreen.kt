@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.angelina.wallet_application.R
+import com.angelina.wallet_application.ui.theme.Dimens
 import kotlinx.coroutines.delay
 
 @Composable
@@ -38,7 +38,7 @@ fun Splash() {
     ) {
         Image(
             modifier = Modifier
-                .size(120.dp),
+                .size(Dimens.dp_120),
             painter = painterResource(R.drawable.ic_logo),
             contentDescription = ""
         )

@@ -27,10 +27,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.angelina.wallet_application.R
+import com.angelina.wallet_application.ui.theme.Dimens
 import com.angelina.wallet_application.ui.theme.Typography
 
 @Composable
@@ -47,12 +46,12 @@ fun ProfileScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 22.dp)
+            .padding(horizontal = Dimens.sdp_22)
     ) {
 
         Box(
             modifier = Modifier
-                .padding(vertical = 20.dp)
+                .padding(vertical = Dimens.dp_20)
                 .align(Alignment.End)
         ) {
 
@@ -65,22 +64,22 @@ fun ProfileScreen(
             ) {
                 Text(
                     stringResource(id = R.string.delete),
-                    fontSize = 18.sp,
+                    fontSize = Dimens.sp_18,
                     modifier = Modifier
-                        .padding(horizontal = 10.dp)
+                        .padding(horizontal = Dimens.sdp_10)
                         .clickable(onClick = {
                             onLogOutClick()
                             viewModel.deleteUser()
                         })
                 )
 
-                Divider(modifier = Modifier.padding(vertical = 12.dp))
+                Divider(modifier = Modifier.padding(vertical = Dimens.dp_12))
 
                 Text(
                     stringResource(id = R.string.log_out),
-                    fontSize = 18.sp,
+                    fontSize = Dimens.sp_18,
                     modifier = Modifier
-                        .padding(horizontal = 10.dp)
+                        .padding(horizontal = Dimens.sdp_10)
                         .clickable(onClick = {
                             onLogOutClick()
                             viewModel.logOut()
@@ -92,7 +91,7 @@ fun ProfileScreen(
         Text(
             text = stringResource(id = R.string.profile),
             style = Typography.titleMedium,
-            modifier = Modifier.padding(top = 28.dp, bottom = 20.dp)
+            modifier = Modifier.padding(top = Dimens.sdp_28, bottom = Dimens.dp_20)
         )
 
         UserData(
@@ -114,15 +113,15 @@ fun UserData(
     Surface(
         modifier = Modifier
             .fillMaxWidth(),
-        shape = RoundedCornerShape(20.dp),
-        shadowElevation = 7.dp,
+        shape = RoundedCornerShape(Dimens.dp_20),
+        shadowElevation = Dimens.sdp_6,
         color = Color.White
     ) {
 
         Column(
             modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .padding(vertical = 16.dp)
+                .padding(horizontal = Dimens.dp_16)
+                .padding(vertical = Dimens.dp_16)
         ) {
 
             Row(
@@ -132,14 +131,14 @@ fun UserData(
                 Text(
                     text = stringResource(id = R.string.username),
                     style = Typography.titleMedium,
-                    fontSize = 17.sp,
-                    modifier = Modifier.padding(bottom = 12.dp)
+                    fontSize = Dimens.sp_18,
+                    modifier = Modifier.padding(bottom = Dimens.dp_12)
                 )
 
                 Text(
                     text = username,
                     style = Typography.titleSmall,
-                    modifier = Modifier.padding(bottom = 12.dp)
+                    modifier = Modifier.padding(bottom = Dimens.dp_12)
                 )
             }
 
@@ -152,14 +151,14 @@ fun UserData(
                 Text(
                     text = stringResource(id = R.string.email_profile),
                     style = Typography.titleMedium,
-                    fontSize = 17.sp,
-                    modifier = Modifier.padding(vertical = 12.dp)
+                    fontSize = Dimens.sp_18,
+                    modifier = Modifier.padding(vertical = Dimens.dp_12)
                 )
 
                 Text(
                     text = email,
                     style = Typography.titleSmall,
-                    modifier = Modifier.padding(vertical = 12.dp)
+                    modifier = Modifier.padding(vertical = Dimens.dp_12)
                 )
             }
 
@@ -172,14 +171,14 @@ fun UserData(
                 Text(
                     text = stringResource(id = R.string.cards),
                     style = Typography.titleMedium,
-                    fontSize = 17.sp,
-                    modifier = Modifier.padding(top = 12.dp)
+                    fontSize = Dimens.sp_18,
+                    modifier = Modifier.padding(top = Dimens.dp_12)
                 )
 
                 Text(
                     text = countOfCards,
                     style = Typography.titleSmall,
-                    modifier = Modifier.padding(top = 12.dp)
+                    modifier = Modifier.padding(top = Dimens.dp_12)
                 )
             }
 

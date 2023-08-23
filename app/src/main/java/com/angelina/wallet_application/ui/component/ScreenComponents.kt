@@ -28,9 +28,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.angelina.wallet_application.R
+import com.angelina.wallet_application.ui.theme.Dimens
 import com.angelina.wallet_application.ui.theme.Purple40
 import com.angelina.wallet_application.ui.theme.Typography
 import com.angelina.wallet_application.ui.theme.textFontFamily
@@ -46,14 +45,14 @@ fun BottomText(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.Bottom,
         modifier = Modifier
-            .padding(bottom = 46.dp)
+            .padding(bottom = Dimens.sdp_46)
             .fillMaxSize()
     ) {
 
         Text(
             text = stringResource(id = text),
             style = Typography.labelSmall,
-            modifier = Modifier.padding(end = 3.dp)
+            modifier = Modifier.padding(end = Dimens.sdp_2)
         )
 
         Text(
@@ -75,7 +74,7 @@ fun TextField(
     text: String,
     labelText: Int,
     textFieldText: Int,
-    textFieldBottomPadding: Dp = 0.dp,
+    textFieldBottomPadding: Dp = Dimens.sdp_0,
     isPasswordField: Boolean = false,
     isScanner: Boolean = false,
     isError: Boolean = false,
@@ -89,7 +88,7 @@ fun TextField(
     Text(
         text = stringResource(id = labelText),
         style = Typography.labelSmall,
-        modifier = Modifier.padding(bottom = 6.dp)
+        modifier = Modifier.padding(bottom = Dimens.sdp_6)
     )
 
     OutlinedTextField(
@@ -130,10 +129,10 @@ fun TextField(
         modifier = Modifier
             .padding(bottom = textFieldBottomPadding)
             .fillMaxWidth()
-            .height(54.dp)
+            .height(Dimens.sdp_54)
             .border(
-                shape = RoundedCornerShape(10.dp),
-                width = 1.dp,
+                shape = RoundedCornerShape(Dimens.sdp_10),
+                width = Dimens.sdp_1,
                 color = if (hasFocus) Color.Black else Color.LightGray
             )
             .onFocusChanged { focusState -> hasFocus = focusState.hasFocus },
@@ -151,8 +150,8 @@ fun TextField(
 @Composable
 fun CommonButton(
     onClick: () -> Unit = {},
-    topPadding: Dp = 0.dp,
-    bottomPadding: Dp = 0.dp,
+    topPadding: Dp = Dimens.sdp_0,
+    bottomPadding: Dp = Dimens.sdp_0,
     containerColor: Color = Purple40,
     contentColor: Color = Color.White,
     borderColor: Color = Purple40,
@@ -161,12 +160,12 @@ fun CommonButton(
 
     Button(
         onClick = onClick,
-        shape = RoundedCornerShape(10.dp),
+        shape = RoundedCornerShape(Dimens.sdp_10),
         modifier = Modifier
             .padding(top = topPadding, bottom = bottomPadding)
             .fillMaxWidth()
-            .height(54.dp),
-        border = BorderStroke(1.dp, borderColor),
+            .height(Dimens.sdp_54),
+        border = BorderStroke(Dimens.sdp_1, borderColor),
         colors = ButtonDefaults.buttonColors(
             containerColor = containerColor,
             contentColor = contentColor
@@ -175,7 +174,7 @@ fun CommonButton(
         Text(
             text = stringResource(id = text),
             fontFamily = textFontFamily,
-            fontSize = 16.sp
+            fontSize = Dimens.sp_16
         )
     }
 
@@ -188,18 +187,18 @@ fun BackArrow(
     arrow: Int = R.drawable.ic_arrow_white
 ) {
     Surface(
-        shape = RoundedCornerShape(10.dp),
-        border = BorderStroke(width = 1.dp, color = color),
+        shape = RoundedCornerShape(Dimens.sdp_10),
+        border = BorderStroke(width = Dimens.sdp_1, color = color),
         color = color,
         modifier = Modifier
-            .size(40.dp, 40.dp)
+            .size(Dimens.sdp_40, Dimens.sdp_40)
             .clickable(onClick = onClick)
     ) {
         Icon(
             painter = painterResource(id = arrow),
             contentDescription = "",
             tint = Color.Unspecified,
-            modifier = Modifier.padding(9.dp, 9.dp, 9.dp, 9.dp)
+            modifier = Modifier.padding(Dimens.sdp_10)
         )
     }
 }
@@ -231,7 +230,7 @@ fun DeleteAlertDialog(
                 text = stringResource(R.string.no),
                 style = Typography.titleSmall,
                 modifier = Modifier
-                    .padding(end = 10.dp)
+                    .padding(end = Dimens.sdp_10)
                     .clickable {
                         onDismissButtonClick()
                     }

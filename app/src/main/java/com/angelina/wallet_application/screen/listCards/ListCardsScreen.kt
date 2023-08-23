@@ -26,11 +26,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.angelina.wallet_application.R
 import com.angelina.wallet_application.entity.firebase.ShopFirebase
+import com.angelina.wallet_application.ui.theme.Dimens
 import com.angelina.wallet_application.ui.theme.Typography
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
@@ -66,19 +66,19 @@ fun ListCardsScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 22.dp)
+                .padding(horizontal = Dimens.sdp_22)
         ) {
 
             Text(
                 text = stringResource(id = R.string.my_cards),
                 style = Typography.titleMedium,
-                modifier = Modifier.padding(top = 30.dp, bottom = 20.dp)
+                modifier = Modifier.padding(top = Dimens.dp_30, bottom = Dimens.dp_20)
             )
 
             LazyVerticalStaggeredGrid(
                 columns = StaggeredGridCells.Fixed(2),
-                verticalItemSpacing = 10.dp,
-                horizontalArrangement = Arrangement.spacedBy(10.dp)
+                verticalItemSpacing = Dimens.sdp_10,
+                horizontalArrangement = Arrangement.spacedBy(Dimens.sdp_10)
             ) {
                 items(listOfCards.value ?: arrayListOf()) {
                     CardItem(
@@ -110,9 +110,9 @@ fun CardItem(
                 contentScale = ContentScale.FillWidth,
                 contentDescription = "",
                 modifier = Modifier
-                    .clip(RoundedCornerShape(16.dp))
-                    .width(178.dp)
-                    .height(124.dp)
+                    .clip(RoundedCornerShape(Dimens.dp_16))
+                    .width(Dimens.sdp_178)
+                    .height(Dimens.sdp_124)
                     .background(Color(shop.color))
             )
         }

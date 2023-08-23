@@ -10,12 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.angelina.wallet_application.R
 import com.angelina.wallet_application.ui.component.BottomText
 import com.angelina.wallet_application.ui.component.CommonButton
 import com.angelina.wallet_application.ui.component.TextField
+import com.angelina.wallet_application.ui.theme.Dimens
 import com.angelina.wallet_application.ui.theme.Typography
 
 @ExperimentalGetImage
@@ -43,20 +43,20 @@ fun AuthorizationScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 22.dp)
+            .padding(horizontal = Dimens.sdp_22)
     ) {
 
         Text(
             text = stringResource(id = R.string.authorization),
             style = Typography.titleMedium,
-            modifier = Modifier.padding(top = 110.dp, bottom = 26.dp)
+            modifier = Modifier.padding(top = Dimens.sdp_110, bottom = Dimens.sdp_26)
         )
 
         TextField(
             viewModel.email,
             R.string.email,
             R.string.email_example,
-            12.dp
+            Dimens.dp_12
         ) { email -> viewModel.updateEmail(email) }
 
         TextField(
@@ -66,7 +66,7 @@ fun AuthorizationScreen(
             isPasswordField = true
         ) { password -> viewModel.updatePassword(password) }
 
-        CommonButton(text = R.string.enter, topPadding = 32.dp, bottomPadding = 22.dp,
+        CommonButton(text = R.string.enter, topPadding = Dimens.sdp_32, bottomPadding = Dimens.sdp_22,
             onClick = {
                 viewModel.login()
             }
