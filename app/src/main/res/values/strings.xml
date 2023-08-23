@@ -1,0 +1,69 @@
+<resources>
+
+    <string name="app_name">Wallet</string>
+
+    <string name="application_name">Wallet</string>
+    <string name="slogan_text">All establishments in one place and under your control!</string>
+    <string name="authorization">Authorization</string>
+    <string name="registration">Registration</string>
+
+    <string name="email">Email</string>
+    <string name="email_example">example@gmail.com</string>
+    <string name="remember_password">Remember password?</string>
+    <string name="enter">Enter</string>
+    <string name="get_the_code">Get the code</string>
+
+    <string name="password_validation">at least 6 characters</string>
+    <string name="confirm_new_password">Confirm new password</string>
+    <string name="repeat_password">repeat password</string>
+    <string name="have_an_account">Already have an account?</string>
+    <string name="go_to_login">Go to login</string>
+
+    <string name="password">Password</string>
+    <string name="password_lower_case">password</string>
+
+    <string name="no_account">No account</string>
+    <string name="sign_up">Sign up</string>
+    <string name="google_icon">google icon</string>
+    <string name="user_name">user name</string>
+    <string name="inv_pass">Create password</string>
+    <string name="check_pass">Confirm password</string>
+    <string name="create_acc">Create new account</string>
+
+    <string name="your_name">Your name</string>
+
+    <string name="my_cards">My cards</string>
+    <string name="catalog">Catalog</string>
+    <string name="profile">Profile</string>
+
+    <string name="onboardingTitle1">Scan a card</string>
+    <string name="onboardingText1">Scan any of your discount cards in a couple of moments</string>
+    <string name="onboardingTitle2">Add card to app</string>
+    <string name="onboardingText2">Select the required options and check the data before adding</string>
+    <string name="onboardingTitle3">Get paid</string>
+    <string name="onboardingText3">When making a purchase in stores, open our application</string>
+    <string name="skip">Skip</string>
+    <string name="done">Done</string>
+
+    <string name="addCard">Add card</string>
+    <string name="add">Add</string>
+    <string name="card_number">Card number</string>
+    <string name="shops">Shops</string>
+
+    <string name="confirm_delete">Are you sure you want to delete the card?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="card_data">Card data</string>
+    <string name="card_deleted">Card deleted</string>
+    <string name="delete">Delete</string>
+
+    <string name="username"> Username</string>
+    <string name="email_profile">Email</string>
+    <string name="cards">Cards</string>
+    <string name="log_out">Log out</string>
+
+    <string name="no_internet">No Internet connection</string>
+    <string name="fill_fields">Fill all fields</string>
+    <string name="incorrect_fields">Incorrect fields</string>
+
+</resources>

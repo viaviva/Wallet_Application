@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Wallet_Application</string>
+
+    <string name="application_name">Кошелек</string>
+    <string name="slogan_text">Все карты в одном месте и под твоим контролем!</string>
+    <string name="authorization">Авторизация</string>
+    <string name="registration">Регистрация</string>
+
+    <string name="email">Электронная почта</string>
+    <string name="email_example" translatable="false">example@gmail.com</string>
+    <string name="remember_password">Помните пароль?</string>
+    <string name="enter">Войти</string>
+    <string name="get_the_code">Получить код</string>
+
+    <string name="your_name">Ваше имя</string>
+    <string name="password_validation">не менее 6 символов</string>
+    <string name="confirm_new_password">Подвердите новый пароль</string>
+    <string name="repeat_password">повторите пароль</string>
+    <string name="have_an_account">Уже есть аккаунт?</string>
+    <string name="go_to_login">Перейти к авторизации</string>
+
+    <string name="password">Пароль</string>
+    <string name="password_lower_case">пароль</string>
+    <string name="no_account">Нет аккаунта?</string>
+    <string name="sign_up">Зарегистрироваться</string>
+
+    <string name="google_icon">Google icon</string>
+    <string name="user_name">имя пользователя</string>
+    <string name="inv_pass">Придумать пароль</string>
+    <string name="check_pass">Подтвердить пароль</string>
+    <string name="create_acc">Создать аккаунт</string>
+
+    <string name="my_cards">Мои карты</string>
+    <string name="catalog">Каталог</string>
+    <string name="profile">Профиль</string>
+
+    <string name="onboardingTitle1">Просканируйте карту</string>
+    <string name="onboardingText1">Просканируйте любую свою скидочную карту в пару мгновений</string>
+    <string name="onboardingTitle2">Добавьте карту</string>
+    <string name="onboardingText2">Выберите необходимые параметры и проверьте данные перед добавлением</string>
+    <string name="onboardingTitle3">Расплачивайтесь</string>
+    <string name="onboardingText3">При совершении покупки в магазинах открывайте наше приложение</string>
+    <string name="skip">Пропустить</string>
+    <string name="done">Готово</string>
+
+    <string name="addCard">Добавление карты</string>
+    <string name="add">Добавить</string>
+    <string name="card_number">Номер карты</string>
+    <string name="shops">Магазины</string>
+
+    <string name="confirm_delete">Уверены, что хотите удалить карту?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="card_data">Данные карты</string>
+    <string name="card_deleted">Карта удалена</string>
+    <string name="delete">Удалить</string>
+
+    <string name="username"> Имя</string>
+    <string name="email_profile">Email</string>
+    <string name="cards">Карты</string>
+    <string name="log_out">Выйти</string>
+
+    <string name="no_internet">Нет подключения к интернету</string>
+    <string name="fill_fields">Заполните все поля</string>
+    <string name="incorrect_fields">Данные заполнены неверно</string>
+
+</resources>
