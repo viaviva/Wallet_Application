@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -43,7 +42,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
-import coil.compose.AsyncImage
 import com.angelina.wallet_application.R
 import com.angelina.wallet_application.ui.component.CommonButton
 import com.angelina.wallet_application.ui.component.TextField
@@ -63,10 +61,13 @@ fun AddCardScreen(
 
     val fillFields = stringResource(id = R.string.fill_fields)
     val incorrectFields = stringResource(id = R.string.incorrect_fields)
+    val noInternetConnection = stringResource(id = R.string.no_internet)
 
     viewModel.run {
         emptyFields = { Toast.makeText(context, fillFields, Toast.LENGTH_LONG).show() }
         errorData = { Toast.makeText(context, incorrectFields, Toast.LENGTH_LONG).show() }
+        noInternet = { Toast.makeText(context, noInternetConnection, Toast.LENGTH_LONG).show() }
+        successAdd = onAddCardButtonClick
 
         setBarcodeFromScanner(barcode)
         getCountOfCards()
@@ -105,7 +106,6 @@ fun AddCardScreen(
         CommonButton(text = R.string.add, topPadding = 40.dp, bottomPadding = 22.dp,
             onClick = {
                 viewModel.addCard()
-                onAddCardButtonClick()
             }
         )
 
@@ -252,13 +252,6 @@ fun LargeDropdownMenuItem(
             .clickable(enabled) { onClick() }
             .fillMaxWidth()
             .padding(Dimens.dp_16)) {
-            AsyncImage(
-                model = "https://listovki.zabava.by/upload/iblock/3f0/3f0b29739dd7672614481f354e0bf336.png",
-                contentDescription = "",
-                modifier = Modifier
-                    .padding(end = Dimens.sdp_6)
-                    .size(Dimens.dp_24)
-            )
             Text(
                 text = text,
                 style = MaterialTheme.typography.titleSmall,

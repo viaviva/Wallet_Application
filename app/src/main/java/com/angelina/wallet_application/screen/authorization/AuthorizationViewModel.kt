@@ -1,6 +1,5 @@
 package com.angelina.wallet_application.screen.authorization
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -9,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.angelina.wallet_application.repository.CardRepository
 import com.angelina.wallet_application.repository.LoginRepository
 import com.angelina.wallet_application.repository.SharedPreferenceRepository
+import com.angelina.wallet_application.validation.emailValidation
 import com.angelina.wallet_application.validation.textFieldValidation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -27,8 +27,6 @@ class AuthorizationViewModel @Inject constructor(
 
     var password by mutableStateOf("")
         private set
-
-    private val emailRegex = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+".toRegex()
 
     var successLogin: (() -> Unit)? = null
 
@@ -52,7 +50,6 @@ class AuthorizationViewModel @Inject constructor(
                 loginRepository.login(email, password, {
                     getCardsFromFirebase()
                     successLogin?.invoke()
-                    Log.e("firebase", "OK 2")
                 }, {
                     errorData?.invoke()
                 })
@@ -78,9 +75,7 @@ class AuthorizationViewModel @Inject constructor(
     }
 
     private fun errorData(): Boolean {
-        return if (email.matches(emailRegex)
-                .not() && textFieldValidation(email) && textFieldValidation(password)
-        ) {
+        return if (emailValidation(email) && textFieldValidation(password)) {
             errorData?.invoke()
             false
         } else {

@@ -10,6 +10,7 @@ import com.angelina.wallet_application.model.Card
 import com.angelina.wallet_application.repository.CardRepository
 import com.angelina.wallet_application.repository.SharedPreferenceRepository
 import com.angelina.wallet_application.repository.ShopRepository
+import com.angelina.wallet_application.validation.barcodeValidation
 import com.angelina.wallet_application.validation.textFieldValidation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -32,9 +33,13 @@ class AddCardViewModel @Inject constructor(
     var shop by mutableStateOf(-1)
         private set
 
+    var noInternet: (() -> Unit)? = null
+
     var emptyFields: (() -> Unit)? = null
 
     var errorData: (() -> Unit)? = null
+
+    var successAdd: (() -> Unit)? = null
 
     init {
         shopRepository.listOfShops.forEach {
@@ -74,19 +79,25 @@ class AddCardViewModel @Inject constructor(
 
     fun addCard() {
         if (isFieldsNoEmpty() && errorData()) {
-            viewModelScope.launch {
-                if (maxId.value != null) {
-                    sharedPreferenceRepository.setNoCards(false)
-                    cardRepository.setNoCards()
+            if (sharedPreferenceRepository.getIsNoInternet()) {
+                viewModelScope.launch {
+                    if (maxId.value != null) {
+                        sharedPreferenceRepository.setNoCards(false)
+                        cardRepository.setNoCards()
 
-                    cardRepository.addCard(
-                        Card(
-                            maxId.value!!,
-                            shop.toLong(),
-                            barcode
+                        cardRepository.addCard(
+                            Card(
+                                maxId.value!!,
+                                shop.toLong(),
+                                barcode
+                            )
                         )
-                    )
+                    }
                 }
+                successAdd?.invoke()
+            }
+            else {
+                noInternet?.invoke()
             }
         }
     }
@@ -101,7 +112,7 @@ class AddCardViewModel @Inject constructor(
     }
 
     private fun errorData(): Boolean {
-        return if (textFieldValidation(barcode) || (shop == -1)) {
+        return if (textFieldValidation(barcode) || (shop == -1) || barcodeValidation(barcode)) {
             errorData?.invoke()
             false
         } else {
