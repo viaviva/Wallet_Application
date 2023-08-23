@@ -31,7 +31,7 @@ fun RootNavGraph(
         }
         authNavGraph(navController = navController, isFirstOpen)
         composable(route = Graph.HOME) {
-            BottomBarMainScreen()
+            BottomBarMainScreen(navController)
         }
     }
 

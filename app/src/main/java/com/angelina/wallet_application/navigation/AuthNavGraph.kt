@@ -7,7 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.angelina.wallet_application.screen.EntryScreen
-import com.angelina.wallet_application.screen.RegistrationScreen
+import com.angelina.wallet_application.screen.registration.RegistrationScreen
 import com.angelina.wallet_application.screen.authorization.AuthorizationScreen
 import com.angelina.wallet_application.screen.onboarding.OnBoardingScreen
 import com.google.accompanist.pager.ExperimentalPagerApi

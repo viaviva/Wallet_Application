@@ -78,8 +78,8 @@ fun TextField(
     textFieldText: Int,
     textFieldBottomPadding: Dp = 0.dp,
     isPasswordField: Boolean = false,
-    isVerified: Boolean = false,
     isScanner: Boolean = false,
+    isError: Boolean = false,
     onScannerButtonClick: () -> Unit = {},
     onValueChange: (String) -> Unit,
 //    isError: (Any) -> Unit
@@ -98,6 +98,7 @@ fun TextField(
         value = text, onValueChange = {
             onValueChange(it)
         },
+        isError = isError,
         placeholder = {
             Text(text = stringResource(id = textFieldText))
         },
@@ -108,17 +109,6 @@ fun TextField(
                 else R.drawable.ic_visibility_off
 
                 IconButton(onClick = { passwordVisible = !passwordVisible }) {
-                    Icon(
-                        painter = painterResource(id = image),
-                        contentDescription = ""
-                    )
-                }
-            }
-
-            if (isVerified) {
-                val image = R.drawable.ic_verified
-
-                IconButton(onClick = {}) {
                     Icon(
                         painter = painterResource(id = image),
                         contentDescription = ""
@@ -153,7 +143,8 @@ fun TextField(
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = Color.Unspecified,
             unfocusedBorderColor = Color.Unspecified,
-            cursorColor = Color.Black
+            cursorColor = Color.Black,
+            errorBorderColor = Color.Red
         )
     )
 
@@ -282,8 +273,8 @@ fun DeleteAlertDialog(
                 modifier = Modifier
                     .padding(end = 10.dp)
                     .clickable {
-                    onDismissButtonClick()
-                }
+                        onDismissButtonClick()
+                    }
             )
         }
     )

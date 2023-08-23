@@ -31,10 +31,9 @@ class CardRepository @Inject constructor(
 
     val listOfCards = MutableStateFlow(arrayListOf<CardFirebase>())
 
-    val uid = sharedPreferenceRepository.getUserId()
-
     fun getCardsFromFirebase() {
-        database.toUserCards(uid).addListenerForSingleValueEvent(object : ValueEventListener {
+        Log.e("SP", sharedPreferenceRepository.getUserId())
+        database.toUserCards(sharedPreferenceRepository.getUserId()).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 val list = arrayListOf<CardFirebase>()
 
@@ -46,6 +45,7 @@ class CardRepository @Inject constructor(
 
                     GlobalScope.launch {
                         listOfCards.emit(list)
+                        Log.e("LIST OF CARDS", listOfCards.value.toString())
                         putCardsIntoRoom()
                     }
                 } else {
@@ -73,18 +73,18 @@ class CardRepository @Inject constructor(
 
     suspend fun addCard(card: Card) {
         cardDao.insertCard(card.toCardEntity())
-        database.toUserCard(uid, card.idCard.toString()).setValue(card.toCardFirebase())
+        database.toUserCard(sharedPreferenceRepository.getUserId(), card.idCard.toString()).setValue(card.toCardFirebase())
     }
 
     suspend fun deleteCard(id: Long) {
         val card = getCard(id.toString())
 
         cardDao.deleteNote(card.toCardEntity())
-        database.toUserCard(uid, id.toString()).removeValue()
+        database.toUserCard(sharedPreferenceRepository.getUserId(), id.toString()).removeValue()
     }
 
     fun setNoCards() =
-        database.toNoCards(uid).setValue(false)
+        database.toNoCards(sharedPreferenceRepository.getUserId()).setValue(false)
 
     suspend fun deleteAllCards() = cardDao.deleteAllCards()
 

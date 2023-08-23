@@ -62,7 +62,8 @@ fun CardScreen(
 ) {
 
     var expanded by remember { mutableStateOf(false) }
-    var openDialog = remember { mutableStateOf(false) }
+    val openDialog = remember { mutableStateOf(false) }
+
     val content = LocalContext.current
     val cardDeletedText = stringResource(id = R.string.card_deleted)
 
@@ -234,9 +235,4 @@ fun rememberQrBitmapPainter(
 
         BitmapPainter(currentBitmap.asImageBitmap())
     }
-}
-
-@Composable
-fun CustomDropdownMenu() {
-
 }

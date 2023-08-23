@@ -23,7 +23,9 @@ import com.angelina.wallet_application.ui.theme.textFontFamily
 @OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalGetImage
 @Composable
-fun BottomBarMainScreen() {
+fun BottomBarMainScreen(
+    rootNavController: NavHostController
+) {
     val bottomNavController = rememberNavController()
 
     val screens = listOf(
@@ -40,7 +42,7 @@ fun BottomBarMainScreen() {
             )
         }
     ) {
-        BottomNavGraph(navController = bottomNavController)
+        BottomNavGraph(bottomNavController, rootNavController)
     }
 }
 
@@ -49,6 +51,7 @@ fun BottomBar(
     bottomNavController: NavHostController,
     items: List<BottomBarScreen>
 ) {
+
 
     NavigationBar(
         tonalElevation = 0.dp,

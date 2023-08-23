@@ -35,8 +35,8 @@ import com.angelina.wallet_application.ui.theme.Typography
 
 @Composable
 fun ProfileScreen(
-    viewModel: ProfileViewModel = hiltViewModel(),
-    onLogOutClick: () -> Unit
+    onLogOutClick: () -> Unit,
+    viewModel: ProfileViewModel = hiltViewModel()
 ) {
 
     var expanded by remember { mutableStateOf(false) }

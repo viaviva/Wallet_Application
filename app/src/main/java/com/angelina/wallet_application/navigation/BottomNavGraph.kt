@@ -2,26 +2,27 @@ package com.angelina.wallet_application.navigation
 
 import androidx.camera.core.ExperimentalGetImage
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.angelina.wallet_application.screen.card.CardScreen
 import com.angelina.wallet_application.screen.addCard.AddCardScreen
+import com.angelina.wallet_application.screen.card.CardScreen
 import com.angelina.wallet_application.screen.listCards.ListCardsScreen
 import com.angelina.wallet_application.screen.profile.ProfileScreen
 import com.angelina.wallet_application.screen.scanner.ScannerScreen
 import com.angelina.wallet_application.ui.component.BottomBarScreen
-import kotlinx.coroutines.launch
 
 const val ITEM_SCREEN = "itemScreen"
 const val SCANNER_SCREEN = "scannerScreen"
 
 @ExperimentalGetImage
 @Composable
-fun BottomNavGraph(navController: NavHostController) {
+fun BottomNavGraph(
+    navController: NavHostController,
+    rootNavController: NavHostController
+) {
 
     NavHost(
         navController = navController,
@@ -55,14 +56,14 @@ fun BottomNavGraph(navController: NavHostController) {
             )
         }
         composable(BottomBarScreen.Profile.route) {
-            val coroutineScope = rememberCoroutineScope()
-
             ProfileScreen(
                 onLogOutClick = {
-                    coroutineScope.launch {
-                        navController.navigate(
-                            Graph.AUTHENTICATION
-                        )
+                    rootNavController.navigate(
+                        Graph.AUTHENTICATION
+                    ) {
+                        popUpTo(Auth.Entry.route) {
+                            inclusive = true
+                        }
                     }
                 }
             )
@@ -91,6 +92,7 @@ fun BottomNavGraph(navController: NavHostController) {
                 }
             )
         }
+
     }
 }
 

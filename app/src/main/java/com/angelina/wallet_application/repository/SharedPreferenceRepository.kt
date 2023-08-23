@@ -11,6 +11,7 @@ private const val USER_PREF_FILE = "userPrefFile"
 private const val SHARED_PREF_FILE = "sharedPrefFile"
 
 private const val IS_FIRST_OPEN = "isFirstOpen"
+private const val IS_NO_INTERNET ="isNoInternet"
 private const val IS_USER_LOG_IN = "isLogIn"
 
 private const val USERNAME = "username"
@@ -44,6 +45,14 @@ class SharedPreferenceRepository @Inject constructor(
     fun setIsFirstOpen() {
         sharedPreferences?.edit {
             putBoolean(IS_FIRST_OPEN, true)
+        }
+    }
+
+    fun getIsNoInternet(): Boolean = sharedPreferences?.getBoolean(IS_NO_INTERNET, false) ?: false
+
+    fun setIsNoInternet(value: Boolean) {
+        sharedPreferences?.edit {
+            putBoolean(IS_NO_INTERNET, value)
         }
     }
 

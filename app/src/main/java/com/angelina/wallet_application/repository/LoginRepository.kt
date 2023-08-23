@@ -1,6 +1,7 @@
 package com.angelina.wallet_application.repository
 
 import android.util.Log
+import com.angelina.wallet_application.util.deleteUser
 import com.angelina.wallet_application.util.toAddUser
 import com.angelina.wallet_application.util.toNoCards
 import com.angelina.wallet_application.util.toUsername
@@ -96,7 +97,11 @@ class LoginRepository @Inject constructor(
                 Log.d("DELETE USER", "User account deleted.")
             }
         }
-        sharedPreferenceRepository.clearUserPreference()
+
+        sharedPreferenceRepository.run {
+            database.deleteUser(getUserId())
+            clearUserPreference()
+        }
     }
 
 }

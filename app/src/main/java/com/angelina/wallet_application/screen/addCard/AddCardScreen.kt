@@ -1,5 +1,6 @@
 package com.angelina.wallet_application.screen.addCard
 
+import android.widget.Toast
 import androidx.camera.core.ExperimentalGetImage
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -37,6 +38,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -56,7 +58,15 @@ fun AddCardScreen(
     viewModel: AddCardViewModel = hiltViewModel()
 ) {
 
+    val context = LocalContext.current
+
+    val fillFields = stringResource(id = R.string.fill_fields)
+    val incorrectFields = stringResource(id = R.string.incorrect_fields)
+
     viewModel.run {
+        emptyFields = { Toast.makeText(context, fillFields, Toast.LENGTH_LONG).show() }
+        errorData = { Toast.makeText(context, incorrectFields, Toast.LENGTH_LONG).show() }
+
         setBarcodeFromScanner(barcode)
         getCountOfCards()
     }
@@ -74,7 +84,7 @@ fun AddCardScreen(
         )
 
         LargeDropdownMenu(
-            label = "Магазин",
+            label = stringResource(id = R.string.shops),
             items = viewModel.listOfShops,
             selectedIndex = viewModel.shop,
             onItemSelected = { index, _ -> viewModel.updateShop(index) },
@@ -83,7 +93,7 @@ fun AddCardScreen(
         TextField(
             viewModel.barcode,
             R.string.card_number,
-            R.string.card_number,
+            R.string.password_validation,
             isScanner = true,
             onScannerButtonClick = {
                 viewModel.setShop()

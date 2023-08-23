@@ -14,7 +14,7 @@
     <string name="get_the_code">Получить код</string>
 
     <string name="your_name">Ваше имя</string>
-    <string name="password_validation">не менее 8 символов</string>
+    <string name="password_validation">не менее 6 символов</string>
     <string name="confirm_new_password">Подвердите новый пароль</string>
     <string name="repeat_password">повторите пароль</string>
     <string name="have_an_account">Уже есть аккаунт?</string>
@@ -43,6 +43,7 @@
     <string name="addCard">Добавление карты</string>
     <string name="add">Добавить</string>
     <string name="card_number">Номер карты</string>
+    <string name="shops">Магазины</string>
 
     <string name="confirm_delete">Уверены, что хотите удалить карту?</string>
     <string name="yes">Да</string>
@@ -56,5 +57,8 @@
     <string name="cards">Карты</string>
     <string name="log_out">Выйти</string>
 
+    <string name="no_internet">Нет подключения к интернету</string>
+    <string name="fill_fields">Заполните все поля</string>
+    <string name="incorrect_fields">Данные заполнены неверно</string>
 
 </resources>
