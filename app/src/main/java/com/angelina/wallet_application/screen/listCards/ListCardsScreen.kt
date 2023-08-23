@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -99,10 +100,13 @@ fun CardItem(
     shop: ShopFirebase,
     onCLick: () -> Unit = {}
 ) {
-    Column(
+    Surface(
         modifier = Modifier.selectable(
             true, onClick = onCLick
-        )
+        ),
+        shape = RoundedCornerShape(Dimens.dp_20),
+        shadowElevation = Dimens.sdp_6,
+        color = Color.White
     ) {
         Column {
             AsyncImage(

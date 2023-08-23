@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.angelina.wallet_application.repository.LoginRepository
 import com.angelina.wallet_application.repository.SharedPreferenceRepository
+import com.angelina.wallet_application.validation.emailValidation
 import com.angelina.wallet_application.validation.textFieldValidation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -22,8 +23,6 @@ class RegistrationViewModel @Inject constructor(
         private set
     var password by mutableStateOf("")
         private set
-
-    private val emailRegex = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+".toRegex()
 
     var noInternet: (() -> Unit)? = null
 
@@ -71,9 +70,7 @@ class RegistrationViewModel @Inject constructor(
     }
 
     private fun errorData(): Boolean {
-        return if (textFieldValidation(password) && textFieldValidation(email) && email.matches(
-                emailRegex
-            ).not()
+        return if (textFieldValidation(password) && textFieldValidation(email) && emailValidation(email)
         ) {
             errorData?.invoke()
             false
